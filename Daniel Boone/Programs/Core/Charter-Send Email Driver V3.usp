@@ -1,0 +1,568 @@
+/***********************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+***********************************************************************************/
+/*
+Dealer Name:		AVSOURCE
+System Name:
+System Number:
+Programmer:			MAD
+Comments:			This module is modified from the original Crestron send mail module
+*/
+
+/***********************************************************************************
+  Compiler Directives
+  (Uncomment and declare compiler directives as needed)
+***********************************************************************************/
+#SYMBOL_NAME "Charter-Send E-Mail Driver v3"
+// #HINT ""
+//#DEFINE_CONSTANT	ciMAXFROMCHARS		242
+//#DEFINE_CONSTANT	ciMAXUSERCHARS		254
+//#DEFINE_CONSTANT	ciMAXSERVERCHARS	40
+//#DEFINE_CONSTANT	ciMAXCHARS			65535
+
+// #CATEGORY ""
+#DEFAULT_VOLATILE
+//#DEFAULT_NONVOLATILE
+
+#HELP_BEGIN
+	For use inside the Charter Send E-Mail module only.
+#HELP_END
+
+
+/***********************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+  (Uncomment and declare inputs and outputs as needed)
+***********************************************************************************/
+DIGITAL_INPUT				_SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_,
+							send_user_msg,
+							send_system_msg,
+							send_test_msg;					//sends the message if required(*) fields are not null
+// ANALOG_INPUT 
+STRING_INPUT				system_IP$[25],		//system ip address
+							vtc_IP$[25],		//codec ip address
+							vtc_name$[255],		//codec system name
+							room_name$[255],	//room name
+							state$[255],
+							city$[255],
+							building$[255],		//room location
+							user_msg$[255],
+							system_msg$[255],		//canned messages
+							user_name$[255],
+							user_contact$[255];
+// BUFFER_INPUT 
+
+DIGITAL_OUTPUT				_SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_,
+							success,			//message sent successfully
+							part_success,	//message sent but an error ocurred
+							failure;			//message not sent
+ANALOG_OUTPUT				error_number;		//integer indicating the error number if failure is
+															
+STRING_OUTPUT				error_text$;
+
+/***** Parameters *****/
+
+string_parameter To_Field[255];  //To of Email Message
+#begin_parameter_properties To_Field
+	propvalidunits = unitstring;
+#end_parameter_properties
+
+string_parameter From_Field[242];  //To of Email Message
+#begin_parameter_properties From_Field
+	propvalidunits = unitstring;
+#end_parameter_properties
+
+string_parameter CC_Field[255];  //To of Email Message
+#begin_parameter_properties CC_Field
+	propvalidunits = unitstring;
+#end_parameter_properties
+
+string_parameter Server[40];  //To of Email Message
+#begin_parameter_properties Server
+	propvalidunits = unitstring;
+#end_parameter_properties
+
+string_parameter User_Name[254];  //To of Email Message
+#begin_parameter_properties User_Name
+	propvalidunits = unitstring;
+#end_parameter_properties
+
+string_parameter Password[254];  //To of Email Message
+#begin_parameter_properties Password
+	propvalidunits = unitstring;
+#end_parameter_properties
+
+
+
+
+
+
+
+/***********************************************************************************
+  Global Variables
+  (Uncomment and declare global variables as needed)
+***********************************************************************************/
+SIGNED_INTEGER	iError;
+STRING	Subject[255],
+		Message[65534],
+		Disclaimer[65534];
+
+
+/***********************************************************************************
+  Event Handlers
+  (Uncomment and declare additional event handlers as needed)
+***********************************************************************************/
+PUSH send_user_msg
+{
+	if((len(Server) > 0) && (len(From_Field) > 0) && (len(To_Field) > 0))
+	{
+		part_success = 0;	//clear the status output
+		success = 0;
+		failure = 0;
+		error_text$ = "Sending e-mail. Please wait.....";
+		error_number = 1000;
+	
+		//build meassage
+		makestring(Subject,"User Generated message");
+		makestring(Message,"Room name: %s\nRoom Location: %s-%s-%s\nSystem IP Address: %s\nCodec IP Address: %s\nMessage: %s\n\nUser Name: %s\nUser Contact Info: %s\n\n%s",room_name$,state$,city$,building$,system_IP$,vtc_IP$,user_msg$,user_name$,user_contact$,Disclaimer);		
+		//send the meesage
+		iError = sendmail(					Server,
+											User_Name,
+											Password,
+											From_Field,
+											To_Field,
+											CC_Field,
+											Subject,
+											Message);
+		//check the error code
+		if(iError >= 0)	//positive error codes
+		{
+			cswitch(iError)
+			{
+				case(0):	//message sent
+				{
+					part_success = 0;
+					failure = 0;
+					success = 1;
+					error_text$ = "Mail sent successfully.";
+					break;
+				}
+				case(3):	//to recipient list error
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Message sent with an error in the To: list.";
+					break;
+				}
+				case(4):	//cc recipient list error
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Message sent with an error in the CC: list.";
+					break;
+				}
+				case(5):	//data error
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Message sent with an error sending the message body.";
+					break;
+				}
+				default:	//any other error with a positive number not covered 
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Unknown Error.";
+					break;
+				}
+			}
+		}
+		else	//negative error codes
+		{
+			iError = -iError;//make the error positive
+			cswitch(iError)
+			{
+				case(1):	//required field is null
+				{
+					success = 0;
+					part_success = 0;
+					failure = 0;
+					error_text$ = "Message not sent, error in Server, From: or To: field.";
+					break;
+				}
+				case(3):	//no connection to mail server
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error connceting to mail server.";
+					break;
+				}
+				case(4):	//lost connection while sending the message
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error sending the message.";
+					break;
+				}
+				case(6):	//internal error while processing the send
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error preparing to send the message.";
+					break;
+				}
+				case(7):	//internal memory error
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error buffering the message.";
+					break;
+				}
+				case(8):	//could not login to the mail server
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error logging in to the server.";
+					break;
+				}
+				case(9):	//authentication login not supported
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, server does not support Authentication login.";
+					break;
+				}
+				default:	//any other error with a negative number not covered
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, unknown error.";
+					break;
+				}
+			}
+		}
+		error_number = iError;
+	}
+}
+
+PUSH send_system_msg
+{
+	if((len(Server) > 0) && (len(From_Field) > 0) && (len(To_Field) > 0))
+	{
+		part_success = 0;	//clear the status output
+		success = 0;
+		failure = 0;
+		error_text$ = "Sending e-mail. Please wait.....";
+		error_number = 1000;
+	
+		//build meassage
+		makestring(Subject,"System Generated message");
+		makestring(Message,"Room name: %s\nRoom Location: %s-%s-%s\nSystem IP Address: %s\nCodec IP Address: %s\n\nMessage: %s\n\n%s",room_name$,state$,city$,building$,system_IP$,vtc_IP$,system_msg$,disclaimer);		
+		//send the meesage
+		iError = sendmail(					Server,
+											User_Name,
+											Password,
+											From_Field,
+											To_Field,
+											CC_Field,
+											Subject,
+											Message);
+		//check the error code
+		if(iError >= 0)	//positive error codes
+		{
+			cswitch(iError)
+			{
+				case(0):	//message sent
+				{
+					part_success = 0;
+					failure = 0;
+					success = 1;
+					error_text$ = "Mail sent successfully.";
+					break;
+				}
+				case(3):	//to recipient list error
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Message sent with an error in the To: list.";
+					break;
+				}
+				case(4):	//cc recipient list error
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Message sent with an error in the CC: list.";
+					break;
+				}
+				case(5):	//data error
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Message sent with an error sending the message body.";
+					break;
+				}
+				default:	//any other error with a positive number not covered 
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Unknown Error.";
+					break;
+				}
+			}
+		}
+		else	//negative error codes
+		{
+			iError = -iError;//make the error positive
+			cswitch(iError)
+			{
+				case(1):	//required field is null
+				{
+					success = 0;
+					part_success = 0;
+					failure = 0;
+					error_text$ = "Message not sent, error in Server, From: or To: field.";
+					break;
+				}
+				case(3):	//no connection to mail server
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error connceting to mail server.";
+					break;
+				}
+				case(4):	//lost connection while sending the message
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error sending the message.";
+					break;
+				}
+				case(6):	//internal error while processing the send
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error preparing to send the message.";
+					break;
+				}
+				case(7):	//internal memory error
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error buffering the message.";
+					break;
+				}
+				case(8):	//could not login to the mail server
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error logging in to the server.";
+					break;
+				}
+				case(9):	//authentication login not supported
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, server does not support Authentication login.";
+					break;
+				}
+				default:	//any other error with a negative number not covered
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, unknown error.";
+					break;
+				}
+			}
+		}
+		error_number = iError;
+	}
+}
+
+PUSH send_test_msg
+{
+	if((len(Server) > 0) && (len(From_Field) > 0) && (len(To_Field) > 0))
+	{
+		part_success = 0;	//clear the status output
+		success = 0;
+		failure = 0;
+		error_text$ = "Sending e-mail. Please wait.....";
+		error_number = 1000;
+	
+		//build meassage
+		makestring(Subject,"Test message sent from room system");
+		makestring(Message,"Room name: %s\nRoom Location: %s-%s-%s\nSystem IP Address: %s\n\nMessage: This message is a test to see if the email system is functioning properly.\n\n%s",room_name$,state$,city$,building$,system_IP$,disclaimer);		
+		//send the meesage
+		iError = sendmail(					Server,
+											User_Name,
+											Password,
+											From_Field,
+											To_Field,
+											CC_Field,
+											Subject,
+											Message);
+		//check the error code
+		if(iError >= 0)	//positive error codes
+		{
+			cswitch(iError)
+			{
+				case(0):	//message sent
+				{
+					part_success = 0;
+					failure = 0;
+					success = 1;
+					error_text$ = "Mail sent successfully.";
+					break;
+				}
+				case(3):	//to recipient list error
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Message sent with an error in the To: list.";
+					break;
+				}
+				case(4):	//cc recipient list error
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Message sent with an error in the CC: list.";
+					break;
+				}
+				case(5):	//data error
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Message sent with an error sending the message body.";
+					break;
+				}
+				default:	//any other error with a positive number not covered 
+				{
+					success = 0;
+					failure = 0;
+					part_success = 1;
+					error_text$ = "Unknown Error.";
+					break;
+				}
+			}
+		}
+		else	//negative error codes
+		{
+			iError = -iError;//make the error positive
+			cswitch(iError)
+			{
+				case(1):	//required field is null
+				{
+					success = 0;
+					part_success = 0;
+					failure = 0;
+					error_text$ = "Message not sent, error in Server, From: or To: field.";
+					break;
+				}
+				case(3):	//no connection to mail server
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error connceting to mail server.";
+					break;
+				}
+				case(4):	//lost connection while sending the message
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error sending the message.";
+					break;
+				}
+				case(6):	//internal error while processing the send
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error preparing to send the message.";
+					break;
+				}
+				case(7):	//internal memory error
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error buffering the message.";
+					break;
+				}
+				case(8):	//could not login to the mail server
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, error logging in to the server.";
+					break;
+				}
+				case(9):	//authentication login not supported
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, server does not support Authentication login.";
+					break;
+				}
+				default:	//any other error with a negative number not covered
+				{
+					success = 0;
+					part_success = 0;
+					failure = 1;
+					error_text$ = "Message not sent, unknown error.";
+					break;
+				}
+			}
+		}
+		error_number = iError;
+	}
+}
+
+/***********************************************************************************
+  Main()
+  Uncomment and place one-time startup code here
+  (This code will get called when the system starts up)
+***********************************************************************************/
+Function Main()
+{
+	/*sFrom = "";
+	sServer = "";
+	sName = "";
+	sPassword = "";
+	sTo = "";
+	sCC = "";
+	sSubject = "";
+	sMessage = "";*/
+	iError = 0;
+	error_text$ = "";
+	error_number = 1000;
+	Subject = "";
+	Message = "";
+	Disclaimer = "This message was sent from the Crestron control system in an integrated conference room on the Charter network. If you are not the intended recipient of this message, please disregard. For problems with this message please contact the Charter conferencing admin at 704-731-3821";
+}

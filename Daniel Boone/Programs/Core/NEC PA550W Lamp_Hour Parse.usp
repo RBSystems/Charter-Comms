@@ -1,0 +1,57 @@
+/*******************************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+*******************************************************************************************/
+/*
+Dealer Name:	AVSOURCE
+System Name:
+System Number:
+Programmer:		MAD
+Comments:		Converts NEC PA550W Projector RX$ for Lamp Hours
+*/
+
+
+#SYMBOL_NAME "NEC PA550W Lamp Hour Parse"
+// #HINT ""
+// #DEFINE_CONSTANT
+// #CATEGORY "" 
+// #DEFAULT_VOLATILE
+//#DEFAULT_NONVOLATILE
+#ENABLE_TRACE
+
+// DIGITAL_INPUT 
+// ANALOG_INPUT 
+STRING_INPUT Rx_From_Proj[100];
+             
+
+ANALOG_OUTPUT Lamp_Hours, Lamp_Hours_Remaining;
+STRING_OUTPUT Lamp_Hours$, Lamp_Hours_Remaining$;
+
+LONG_INTEGER temp[4],iLamp_Hours, iLamp_Hours_Remaining;
+
+CHANGE Rx_From_Proj
+{	IF(BYTE(Rx_From_Proj,1) = 0x23 && BYTE(Rx_From_Proj,2) = 0x8C && BYTE(Rx_From_Proj,3) = 0x01 && BYTE(Rx_From_Proj,5) = 0x10)
+	{
+			
+		temp[1] = BYTE (Rx_From_Proj,9) * 0x1000000;
+		trace("Byte 9 %ld", temp[1]);
+		temp[2] = BYTE (Rx_From_Proj,8) * 0x10000;
+		trace("Byte 8 %ld", temp[2]);
+		temp[3] = BYTE (Rx_From_Proj,7) * 0x100;
+		trace("Byte 7 %ld", temp[3]);
+		temp[4] = BYTE (Rx_From_Proj,6);
+		trace("Byte 6 %ld", temp[4]);
+
+		iLamp_Hours_Remaining =(7200000- (temp[4] + temp[3] + temp[2] + temp[1])) / 3600;
+        iLamp_Hours = (temp[4] + temp[3] + temp[2] + temp[1]) / 3600;
+		
+		trace("Final %ld",iLamp_Hours);
+
+		Lamp_Hours = iLamp_Hours;
+		Lamp_Hours_Remaining = iLamp_Hours_Remaining;
+		Lamp_Hours_Remaining$ = LTOA(iLamp_Hours_Remaining);
+		Lamp_Hours$ = LTOA(iLamp_Hours);
+
+	}
+}
+		

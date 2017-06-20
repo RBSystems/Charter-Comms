@@ -1,0 +1,138 @@
+[BEGIN]
+  ObjTp=FSgntr
+  Sgntr=ArchiveManifest
+  RelVrs=4.07.03
+  IsProgram=1
+  TopLevelProgram=Charter-RP-5th-TrainingRms-DSP-Slot-4-v1.0.0.smw
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Charter-RP-5th-TrainingRms-DSP-Slot-4-v1.0.0.smw
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Charter-RP-5th-TrainingRms-DSP-Slot-4-v1.0.0.sig
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Charter-RP-5th-TrainingRms-DSP-Slot-4-v1.0.0.lpz
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Charter-RP-5th-TrainingRms-DSP-Slot-4-v1.0.0.smft
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Charter-RP-5th-TrainingRms-DSP-Slot-4-v1.0.0.lpz.hash
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Q-Sys Softphone v1.1.0.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=QSYS Control-[Button] V3.0.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Qsys Control-Named Control.ush
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=QsysControlV3.clz
+  Scope=2
+  Module=Qsys Control-Named Control
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Qsys Control-Named Control.usp
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=QsysControlV3.clz
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=QSYS Control-[Field] V3.0.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=QSYS Control-[List Box] V3.0.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Qsys Control-Named Control- List Box.ush
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Qsys Control-Named Control- List Box.usp
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Multiple HTML Text Formatter v1.1.ush
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Qsys Core V3.0.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Qsys New Core V3.0.1.ush
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Qsys Core V3.0 Help.pdf
+  Scope=2
+  Module=Qsys New Core V3.0.1.ush
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Qsys Core V3.0 Help.pdf
+  Scope=2
+  Module=Qsys Core V3.0.umc
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Logic One.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=QSYS Control-[Button] V3.0 Help.pdf
+  Scope=2
+  Module=QSYS Control-[Button] V3.0.umc
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=QSYS Control-[Knob-Fader] V3.0.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=QSYS Control-[Knob-Fader] V3.0 Help.pdf
+  Scope=2
+  Module=QSYS Control-[Knob-Fader] V3.0.umc
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=QSYS Control-[Field] V3.0 Help.pdf
+  Scope=2
+  Module=QSYS Control-[Field] V3.0.umc
+[END]

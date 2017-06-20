@@ -1,0 +1,155 @@
+[
+Version=1
+]
+[
+ObjTp=FSgntr
+Sgntr=UserMacro
+RelVrs=4.06.01
+IntStrVrs=2
+MinSMWVrs=2.05.04
+
+MinTIOVrs=0
+SavedBy=SMW2.10.32
+]
+[
+ObjTp=Hd
+S0Nd=1
+S1Nd=2
+SLNd=3
+PrNm=Charter-Send Email V3.umc
+CmVr=3.03
+DbVr=61.06.001.00
+DvcDbVr=82.05.002.00
+OpVr=MC3 1.501.2867.25137
+PgmNm=MAD
+DlrNm=AVSOURCE
+CltNm=Charter-Send Email
+JpNo=2
+Incl=362,378,380,405,407,408,409,478,522,537,554,586,590,611,624,767,830,883,1032,1062,1079,1134,1157,1199,1220,1222,1299,1348,1439,1472,1473,1499,1746,1803,1975,2229,2354,2514,2523,2532,3708,3902,3912,3918,3925,1766,2574,2651,2817,2886,2938,2947,3181,3197,3233,3710,3735,3736,3816,3888,4176,4308,4476,4591,4769,5360,5388,
+McNm=Send E-Mail
+SmVr=1026
+DvVr=1026
+TpN1=1
+TpN2=2
+TpN3=3
+TpN4=4
+TpN5=5
+APg=1
+FltTmp=1
+FpCS=0
+EnType=0
+ZeroOnIoOk=0
+]
+[
+ObjTp=Bk
+Nm1=\
+Sx1=0
+Sy1=0
+Mx1=0
+]
+[
+ObjTp=Bw
+H=1
+Lx=0
+Ly=0
+Rx=1395
+Ry=923
+Xm=-1
+Ym=-1
+SH=7
+Z=100
+Ht=3
+Hi=1
+]
+[
+ObjTp=Symbol
+Name=Charter-Send Email V3
+Code=1
+SmplCName=Charter-Send Email V3.umc
+Smpl-C=3
+CompilerTimePrecision=Single_Or_Double_Precision
+Exclusions=1,19,20,21,88,89,167,168,179,213,214,215,216,217,225,226,248,249,266,267,310,718,756,854,302,305,
+Hint=Charter-Send Email
+SMWRev=2.05.22
+TIORev=0
+S+=1
+HelpID=1055
+APg=1
+StdCmd=0
+FltTmp=1
+FpCS=0
+NumFixedInputs=17
+NumFixedOutputs=6
+NumFixedParams=6
+MinVariableInputs=0
+MinVariableInputsList2=0
+MinVariableInputsList3=0
+MinVariableOutputs=0
+MinVariableOutputsList2=0
+MinVariableOutputsList3=0
+MinVariableParams=0
+SymbolTree=46
+UserSymTreeName=AVSOURCE
+InputSigType1=Serial
+InputSigType2=Serial
+InputSigType3=Digital|Analog|Serial|String
+InputSigType4=Serial
+InputSigType5=Serial
+InputSigType6=Serial
+InputSigType7=Serial
+InputSigType8=Serial
+InputSigType9=Digital|Analog|Serial|String
+InputSigType10=Serial
+InputSigType11=Serial
+InputSigType12=Digital|Analog|Serial|String
+InputSigType13=Digital
+InputSigType14=Digital
+InputSigType15=Digital
+InputSigType16=Serial
+OutputSigType1=Digital
+OutputSigType2=Digital
+OutputSigType3=Digital
+OutputSigType4=Digital|Analog|Serial|String
+OutputSigType5=Analog
+OutputSigType6=Serial
+ParamSigType1=String
+ParamSigType2=String
+ParamSigType3=String
+ParamSigType4=String
+ParamSigType5=String
+ParamSigType6=String
+InputCue1=User_Message$
+InputCue2=System_Message$
+InputCue3=[~UNUSED~]
+InputCue4=System_IP_Address$
+InputCue5=Room_Name$
+InputCue6=State$
+InputCue7=City$
+InputCue8=Building$
+InputCue9=[~UNUSED~]
+InputCue10=[vtc]system_name$
+InputCue11=[vtc]ipa$
+InputCue12=[~UNUSED~]
+InputCue13=User_Generated_Message
+InputCue14=System_Generated_Message
+InputCue15=Test_Message
+InputCue16=User_Name$
+InputCue17=User_Contact$
+OutputCue1=Message_Sucessfully_Sent
+OutputCue2=Message_Sent_With_Errors
+OutputCue3=Message_Not_Sent
+OutputCue4=[~UNUSED~]
+OutputCue5=Error_Number
+OutputCue6=Status_Description$
+ParamCue1=To:(Max 242 Characters)
+ParamCue2=From:(Max 242 Characters)
+ParamCue3=CC:(Max 242 Characters)
+ParamCue4=Server:(Max 40 Characters)
+ParamCue5=User Login Name(Max 254 Characters)
+ParamCue6=User Login Password(Max 254 Characters)
+FileName=Charter-Send Email V3.umc
+EncodingType=0
+ZeroOnIoOk=0
+]
+FeSchVr=001
+¶¬ÊäæÒŞÜzbº¶ÄÔ¨àzŒ¦ÎÜèä¦ÎÜèäzªæÊäšÂÆäŞ¤ÊØ¬äæzh\`l\`b’Üè¦èä¬äæzdšÒÜ¦š®¬äæzd\`j\<d:d>šÒÜ¨’¬äæz`¦ÂìÊÈ„òz¦š®d\b`\fdº¶ÄÔ¨àzÈ¦`œÈzb¦bœÈzd¦˜œÈzf äœÚz†ĞÂäèÊäZ¦ÊÜÈ@ŠÚÂÒØ@¬f\êÚÆ†Ú¬äzf\`fˆÄ¬äzlb\`l\<d:`>b\<d:`>ˆìÆˆÄ¬äzpd\`j\<d:`>d\<d:`>à¬äzš†f@b\j`b\dpln\djbfn ÎÚœÚzš‚ˆˆØäœÚz‚¬¦ª¤†Š†ØèœÚz†ĞÂäèÊäZ¦ÊÜÈ@ŠÚÂÒØ”àœŞzd’ÜÆØzfldXfnpXfp`Xh`jXh`nXh`pXh`rXhnpXj<d:d>XjfnX<d:j>hXjplXjr`Xl<d:b>XldhXnlnXpf`X<d:p>fXb`fdXb`ldXb`nrX<d:b>fhX<d:b>jnX<d:b><d:r>Xb<d:d>`Xb<f:d>Xbd<d:r>XbfhpXbhfrXbhndXbhnfXbh<d:r>XbnhlXbp`fXbrnjX<f:d>rXdfjhXdjbhXdjdfXdjfdXfn`pXfr`dXfrbdXfrbpXfrdjXbn<d:l>XdjnhXdljbXdpbnXd<d:p>lXdrfpXdrhnXfbpbXfbrnXfd<d:f>Xfnb`XfnfjXfnflXfpblXf<f:p>XhbnlXhf`pX<d:h>nlXhjrbXhnlrXjfl`Xjf<d:p>XšÆœÚz¦ÊÜÈ@ŠZšÂÒØ¦Ú¬äzb`dlˆì¬äzb`dl¨àœbzb¨àœdzd¨àœfzf¨àœhzh¨àœjzj‚ ÎzbŒØè¨ÚàzbŒà†¦z`ŠÜ¨òàÊz`´ÊäŞÜ’ŞÖz`º¶ÄÔ¨àz„ÖœÚbz¸¦ğbz`¦òbz`šğbz`º¶ÄÔ¨àz„îzb˜ğz`˜òz`¤ğzbfrj¤òzrdf°ÚzZb²ÚzZb¦zn´zb<d:`>èzfÒzbº¶ÄÔT  TrhrhTŠ  T¨àz¦òÚÄŞØœÂÚÊz†ĞÂäèÊäZ¦ÊÜÈ@ŠÚÂÒØ@¬f†ŞÈÊzb¦ÚàØ†œÂÚÊz†ĞÂäèÊäZ¦ÊÜÈ@ŠÚÂÒØ@¬f\êÚÆ¦ÚàØZ†zf†ŞÚàÒØÊä¨ÒÚÊ äÊÆÒæÒŞÜz¦ÒÜÎØÊ¾ä¾ˆŞêÄØÊ¾ äÊÆÒæÒŞÜŠğÆØêæÒŞÜæzbXbrXd`XdbX<d:p>XprXblnXblpXbnrXdbfXdbhXdbjXdblXdbnX<d:d>jX<d:d>lXdhpXdhrXd<d:l>XdlnXfb`XnbpXnjlXpjhXf`dXf`jXÒÜèz†ĞÂäèÊäZ¦ÊÜÈ@ŠÚÂÒØ¦š®¤Êìzd\`j\<d:d>¨’¤Êìz`¦VzbÊØà’ˆzb`<d:j>‚ Îzb¦èÈ†ÚÈz`ŒØè¨ÚàzbŒà†¦z`œêÚŒÒğÊÈ’ÜàêèæzbnœêÚŒÒğÊÈêèàêèæzlœêÚŒÒğÊÈ ÂäÂÚæzlšÒÜ¬ÂäÒÂÄØÊ’Üàêèæz`šÒÜ¬ÂäÒÂÄØÊ’Üàêèæ˜Òæèdz`šÒÜ¬ÂäÒÂÄØÊ’Üàêèæ˜Òæèfz`šÒÜ¬ÂäÒÂÄØÊêèàêèæz`šÒÜ¬ÂäÒÂÄØÊêèàêèæ˜Òæèdz`šÒÜ¬ÂäÒÂÄØÊêèàêèæ˜Òæèfz`šÒÜ¬ÂäÒÂÄØÊ ÂäÂÚæz`¦òÚÄŞØ¨ä<d:Ê>zhlªæÊä¦òÚ¨ä<d:Ê>œÂÚÊz‚¬¦ª¤†Š’Üàêè¦ÒÎ¨òàÊbz¦ÊäÒÂØ’Üàêè¦ÒÎ¨òàÊdz¦ÊäÒÂØ’Üàêè¦ÒÎ¨òàÊfzˆÒÎÒèÂØø‚ÜÂØŞÎø¦ÊäÒÂØø¦èäÒÜÎ’Üàêè¦ÒÎ¨òàÊhz¦ÊäÒÂØ’Üàêè¦ÒÎ¨òàÊjz¦ÊäÒÂØ’Üàêè¦ÒÎ¨òàÊlz¦ÊäÒÂØ’Üàêè¦ÒÎ¨òàÊnz¦ÊäÒÂØ’Üàêè¦ÒÎ¨òàÊpz¦ÊäÒÂØ’Üàêè¦ÒÎ¨òàÊrzˆÒÎÒèÂØø‚ÜÂØŞÎø¦ÊäÒÂØø¦èäÒÜÎ’Üàêè¦ÒÎ¨òàÊb`z¦ÊäÒÂØ’Üàêè¦ÒÎ¨òàÊ<d:b>z¦ÊäÒÂØ’Üàêè¦ÒÎ¨òàÊbdzˆÒÎÒèÂØø‚ÜÂØŞÎø¦ÊäÒÂØø¦èäÒÜÎ’Üàêè¦ÒÎ¨òàÊbfzˆÒÎÒèÂØ’Üàêè¦ÒÎ¨òàÊbhzˆÒÎÒèÂØ’Üàêè¦ÒÎ¨òàÊbjzˆÒÎÒèÂØ’Üàêè¦ÒÎ¨òàÊblz¦ÊäÒÂØêèàêè¦ÒÎ¨òàÊbzˆÒÎÒèÂØêèàêè¦ÒÎ¨òàÊdzˆÒÎÒèÂØêèàêè¦ÒÎ¨òàÊfzˆÒÎÒèÂØêèàêè¦ÒÎ¨òàÊhzˆÒÎÒèÂØø‚ÜÂØŞÎø¦ÊäÒÂØø¦èäÒÜÎêèàêè¦ÒÎ¨òàÊjz‚ÜÂØŞÎêèàêè¦ÒÎ¨òàÊlz¦ÊäÒÂØ ÂäÂÚ¦ÒÎ¨òàÊbz¦èäÒÜÎ ÂäÂÚ¦ÒÎ¨òàÊdz¦èäÒÜÎ ÂäÂÚ¦ÒÎ¨òàÊfz¦èäÒÜÎ ÂäÂÚ¦ÒÎ¨òàÊhz¦èäÒÜÎ ÂäÂÚ¦ÒÎ¨òàÊjz¦èäÒÜÎ ÂäÂÚ¦ÒÎ¨òàÊlz¦èäÒÜÎ’Üàêè†êÊbzªæÊä¾šÊ<d:æ>ÂÎÊH’Üàêè†êÊdz¦òæèÊÚ¾šÊ<d:æ>ÂÎÊH’Üàêè†êÊfz¶üªœª¦Šˆüº’Üàêè†êÊhz¦òæèÊÚ¾’ ¾‚<d:È>äÊ<d:æ>H’Üàêè†êÊjz¤<d:Ş>Ú¾œÂÚÊH’Üàêè†êÊlz¦èÂèÊH’Üàêè†êÊnz†ÒèòH’Üàêè†êÊpz„êÒØÈÒÜÎH’Üàêè†êÊrz¶üªœª¦Šˆüº’Üàêè†êÊb`z¶ìèÆºæòæèÊÚ¾ÜÂÚÊH’Üàêè†êÊ<d:b>z¶ìèÆºÒàÂH’Üàêè†êÊbdz¶üªœª¦Šˆüº’Üàêè†êÊbfzªæÊä¾ÊÜÊäÂèÊÈ¾šÊ<d:æ>ÂÎÊ’Üàêè†êÊbhz¦òæèÊÚ¾ÊÜÊäÂèÊÈ¾šÊ<d:æ>ÂÎÊ’Üàêè†êÊbjz¨Êæè¾šÊ<d:æ>ÂÎÊ’Üàêè†êÊblzªæÊä¾œÂÚÊH’Üàêè†êÊbnzªæÊä¾†ŞÜèÂÆèHêèàêè†êÊbzšÊ<d:æ>ÂÎÊ¾¦êÆÊ<d:æ>Ìê<d:Ø>ò¾¦ÊÜèêèàêè†êÊdzšÊ<d:æ>ÂÎÊ¾¦ÊÜè¾®ÒèĞ¾Š<d:ä>Şäæêèàêè†êÊfzšÊ<d:æ>ÂÎÊ¾œŞè¾¦ÊÜèêèàêè†êÊhz¶üªœª¦Šˆüºêèàêè†êÊjzŠ<d:ä>Şä¾œêÚÄÊäêèàêè†êÊlz¦èÂèêæ¾ˆÊæÆäÒàèÒŞÜH ÂäÂÚ†êÊbz¨ŞtPšÂğ@dhd@†ĞÂäÂÆèÊäæR ÂäÂÚ†êÊdzŒäŞÚtPšÂğ@dhd@†ĞÂäÂÆèÊäæR ÂäÂÚ†êÊfz<d:†>tPšÂğ@dhd@†ĞÂäÂÆèÊäæR ÂäÂÚ†êÊhz¦ÊäìÊätPšÂğ@h`@†ĞÂäÂÆèÊäæR ÂäÂÚ†êÊjzªæÊä@˜ŞÎÒÜ@œÂÚÊPšÂğ@djh@†ĞÂäÂÆèÊäæR ÂäÂÚ†êÊlzªæÊä@˜ŞÎÒÜ@ Â<d:æ>îŞäÈPšÂğ@djh@†ĞÂäÂÆèÊäæRŒÒØÊœÂÚÊz†ĞÂäèÊäZ¦ÊÜÈ@ŠÚÂÒØ@¬f\êÚÆŠÜÆŞÈÒÜÎ¨òàÊz`´ÊäŞÜ’ŞÖz`º¶ÄÔ¨àz¦Úzb¦Ú†zbjnœÚz†ÊÜèäÂØ@†ŞÜèäŞØ@šŞÈêØÊæÄÔ¬Êäzb†ŒzdÜb’zbÜbzbÚ’zbÚzbèzbÚ zb bzº¶ÄÔ¨àz¦Úzd¦Ú†zbjnœÚzœÊèîŞäÖ@šŞÈêØÊæÄÔ¬Êäzb†ŒzdÜb’zbÜbzbÚ’zbÚzbèzbÚ zb bzº¶ÄÔ¨àz¦Úzf¦Ú†zbjnœÚzŠèĞÊäÜÊèÄÔ¬Êäzb†ŒzdÜb’zbÜbzbÚ’zbÚzbèzbÚ zb bzº¶ÄÔ¨àz¦Úzh¦Ú†zbjlœÚz˜ŞÎÒÆÄÔ¬Êäzb†ŒzdÚ†zf†bzdj†dzr†fznº¶ÄÔ¨àz¦Úzj¦Ú†zbjnœÚzˆÊÌÒÜÊ‚äÎêÚÊÜèæÄÔ¬Êäzb†ŒzdÜb’zbÜbzbÚ†zb†bzlÚ’zbÚzbèzbÚ zb bzº¶ÄÔ¨àz¦Úzl¦Ú†z<d:j>œÚz‚äÎêÚÊÜè@ˆÊÌÒÜÒèÒŞÜÄÔ¬Êäzb äzj†ŒzdÜb’zbnÜbzlÚ’zbn’bzjb’dzj`’fzhf’hzj’jzhp’lzh’nzl’pzn’rzhf’b`zr’<d:b>zp’bdzhf’bfzhj’bhzhl’bjzhn’blzb`’bnzblÚzlèzlbzbddzbhfzbjhzhfjz<d:b>lzbfÚ zl bz¨ŞtPšÂğ@dhd@†ĞÂäÂÆèÊäæR dzŒäŞÚtPšÂğ@dhd@†ĞÂäÂÆèÊäæR fz<d:†>tPšÂğ@dhd@†ĞÂäÂÆèÊäæR hz¦ÊäìÊätPšÂğ@h`@†ĞÂäÂÆèÊäæR jzªæÊä@˜ŞÎÒÜ@œÂÚÊPšÂğ@djh@†ĞÂäÂÆèÊäæR lzªæÊä@˜ŞÎÒÜ@ Â<d:æ>îŞäÈPšÂğ@djh@†ĞÂäÂÆèÊäæRº¶ÄÔ¨àz¦Úzn¦Ú†zbdbœÚz†Ş<d:Ú>ÊÜèÄÔ¬Êäzb äzh†Œzd†ÚÜbz‚¬¦ª¤†Š@<d:˜>†@†ŞàòäÒÎĞè@d`bn<d:¸>¨ĞÊ@ÚÂèÊäÒÂØ@ÒÜ@îĞÒÆĞ@èĞÒæ@ÜŞèÒÆÊ@Â<d:à>ÊÂäæ<d:ø>b†ÚÜdzÒæ@èĞÊ@àäŞàÊäèò@ŞÌ@‚¬¦ª¤†Š@<d:˜>†X@îĞÒÆĞ@ÆØÂÒÚæ@ÆŞàòäÒÎĞè@êÜÈÊä@èĞÊ<d:ø>b†ÚÜfzØÂîæ@ŞÌ@èĞÊ@ªÜÒèÊÈ@¦èÂèÊæ@ŞÌ@‚ÚÊäÒÆÂ@ÒÜ@èĞÊ@ÊÜèÒäÊ@ÄŞÈò@ŞÌ@ÚÂèÊäÒÂØ<d:ø>b†ÚÜhzÂÜÈ@ÒÜ@Â<d:Ø>@àÂäèæ@èĞÊäÊŞÌX@äÊÎÂäÈØÊ<d:æ>@ŞÌ@èĞÊ@êæÊ@èŞ@îĞÒÆĞ@Òè@Òæ@ÄÊÒÜÎ<d:ø>b†ÚÜjzàêè\<d:@>‚Üò@êæÊX@ÒÜ@îĞŞØÊ@Şä@ÒÜ@àÂäèX@ŞÌ@èĞÒæ@ÚÂèÊäÒÂØ@Äò@ÂÜŞèĞÊä<d:ø>b†ÚÜlzàÂäèò@îÒèĞŞêè@èĞÊ@ÊğàäÊ<d:æ>@îäÒ<d:è>ÊÜ@àÊäÚÒ<d:æ>ÒŞÜ@ŞÌ@‚¬¦ª¤†Š@<d:˜>†@Òæ<d:ø>b†ÚÜnzàäŞĞÒÄÒèÊÈ\@‚¬¦ª¤†Š@<d:˜>†\@äÊæÊäìÊæ@Â<d:Ø>@äÒÎĞèæ@êÜÈÊä@Â<d:à>ØÒÆÂÄØÊ@ØÂîæ\Ú zb bz‚¬¦ª¤†Š@<d:˜>†@†ŞàòäÒÎĞè@d`bnº¶ÄÔ¨àz¦Úzr¦Ú†zb`fœÚz†ĞÂäèÊäZ¦ÊÜÈ@ŠÚÂÒØ@ˆäÒìÊä@¬f\êæàÄÔ¬Êäzb äzh†ŒzdÜb’zrÜd’z<d:b>ÜbzrÚ’zd`’nzhj’pzhl’rzhn’b`zj’<d:b>zp’bdzr’bfzhp’bhzh’bjzl’blzn’bnzjb’bpzj`’brzb`’d`zblÚz<d:b>èz<d:b>nzbdpzbhrzbjb`z<d:b><d:b>zbfÚ zn bz dzF¨ŞtPšÂğ@dhd@†ĞÂäÂÆèÊäæR fzFŒäŞÚtPšÂğ@dhd@†ĞÂäÂÆèÊäæR hzF<d:†>tPšÂğ@dhd@†ĞÂäÂÆèÊäæR jzF¦ÊäìÊätPšÂğ@h`@†ĞÂäÂÆèÊäæR lzFªæÊä@˜ŞÎÒÜ@œÂÚÊPšÂğ@djh@†ĞÂäÂÆèÊäæR nzFªæÊä@˜ŞÎÒÜ@ Â<d:æ>îŞäÈPšÂğ@djh@†ĞÂäÂÆèÊäæRº¶ÄÔ¨àz¦Úzdj¦Ú†zpjpœÚzšÂÖÊ@¦èäÒÜÎ@ ÊäÚÂÜÊÜèÄÔ¬Êäzb äzh†ŒzdÜb’z<d:b>Ú’z<d:b>’bzj’dzhp’fzh’hzl’jzn’lzjb’nzj`’pzr’rzp’b`zb`’<d:b>zblÚ zb bzd<d:j>Èº¶ÄÔ¨àz¦ÎzhœÚz¦èÂèÊH¦Î¨àzhº¶ÄÔ¨àz¦ÎzjœÚz¦òæèÊÚ¾’ ¾‚<d:È>äÊ<d:æ>H¦Î¨àzhº¶ÄÔ¨àz¦ÎzlœÚz†ÒèòH¦Î¨àzhº¶ÄÔ¨àz¦ÎznœÚz„êÒØÈÒÜÎH¦Î¨àzhº¶ÄÔ¨àz¦ÎzpœÚz¶ìèÆºÒàÂH¦Î¨àzhº¶ÄÔ¨àz¦ÎzrœÚz¶ìèÆºæòæèÊÚ¾ÜÂÚÊH¦Î¨àzhº¶ÄÔ¨àz¦Îzb`œÚzªæÊä¾œÂÚÊH¦Î¨àzhº¶ÄÔ¨àz¦Îz<d:b>œÚzŠ<d:ä>Şä¾œêÚÄÊä¦Î¨àzdº¶ÄÔ¨àz¦ÎzbdœÚzšÊ<d:æ>ÂÎÊ¾¦êÆÊ<d:æ>Ìê<d:Ø>ò¾¦ÊÜèº¶ÄÔ¨àz¦ÎzbfœÚz¦èÂèêæ¾ˆÊæÆäÒàèÒŞÜH¦Î¨àzhº¶ÄÔ¨àz¦ÎzbhœÚzšÊ<d:æ>ÂÎÊ¾¦ÊÜè¾®ÒèĞ¾Š<d:ä>Şäæº¶ÄÔ¨àz¦ÎzbjœÚzšÊ<d:æ>ÂÎÊ¾œŞè¾¦ÊÜèº¶ÄÔ¨àz¦ÎzblœÚzªæÊä¾†ŞÜèÂÆèH¦Î¨àzhº¶ÄÔ¨àz¦ÎzhfœÚz¶üªœª¦Šˆüº¦Î¨àzfbº¶ÄÔ¨àz¦ÎzhjœÚzªæÊä¾ÊÜÊäÂèÊÈ¾šÊ<d:æ>ÂÎÊº¶ÄÔ¨àz¦ÎzhlœÚz¦òæèÊÚ¾ÊÜÊäÂèÊÈ¾šÊ<d:æ>ÂÎÊº¶ÄÔ¨àz¦ÎzhnœÚz¨Êæè¾šÊ<d:æ>ÂÎÊº¶ÄÔ¨àz¦ÎzhpœÚz¤<d:Ş>Ú¾œÂÚÊH¦Î¨àzhº¶ÄÔ¨àz¦Îzj`œÚz¦òæèÊÚ¾šÊ<d:æ>ÂÎÊH¦Î¨àzhº¶ÄÔ¨àz¦ÎzjbœÚzªæÊä¾šÊ<d:æ>ÂÎÊH¦Î¨àzhº

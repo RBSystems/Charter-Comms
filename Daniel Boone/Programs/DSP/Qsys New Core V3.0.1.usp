@@ -1,0 +1,91 @@
+/*
+Dealer Name:Crestron
+System Name:
+System Number:
+Programmer:JMG
+Comments:
+*/
+
+//Compiler Directives
+// #ENABLE_DYNAMIC
+// #SYMBOL_NAME ""
+// #HINT ""
+// #DEFINE_CONSTANT
+#CATEGORY "0" 
+// #HELP_PDF_FILE ""
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+
+//Include Libraries
+
+#User_SimplSharp_Library "QsysControlV3"
+
+//IO Variables
+Digital_Input Init;
+String_Input IP_Address[100];
+String_Input Custom_String[500];
+
+Analog_Output Connection_Value;
+Digital_Output Initialized;
+
+Integer_Parameter Core_ID,Core_Port;
+String_Parameter Login_User[100];
+Integer_Parameter Login_Pin;
+
+//Global Variables
+String gsIP[50];
+integer giPort;
+Integer giID;
+
+
+QsysCore Core;
+
+//Functions
+CallBack Function F_Initialized(Integer Status)
+{
+	Initialized = Status;
+}
+
+ 
+//Events
+EventHandler ConnectionChange(QsysCoreEvent sender, QsysCoreChangeArgs args)
+{
+	Connection_Value = args.Status;
+}
+Push Init
+{
+	If(Len(gsIP) > 0)
+	{
+		
+		Core.ID = giID;
+		Core.port = giPort;
+		Core.Address = gsIP;
+	}	 	
+}
+Change IP_Address
+{
+	gsIP = IP_Address;
+   	giID = Core_ID; 
+	giPort = Core_Port;										//Set Core IP
+}
+Change Custom_String
+{
+ 	Core.SendData(Custom_String);
+}
+
+
+Function Main()
+{
+	WaitForInitializationComplete();
+ 	
+    gsIP = IP_Address;
+   	giID = Core_ID; 
+	giPort = Core_Port; 										//Set Core ID
+	Core.User = Login_User;
+	Core.Pin = Login_Pin;
+
+    registerevent(Core,OnCorex,ConnectionChange);
+ 	Registerdelegate(Core,Initialized,F_Initialized);
+   
+}

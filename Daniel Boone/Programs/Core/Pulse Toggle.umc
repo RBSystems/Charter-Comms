@@ -1,0 +1,117 @@
+[
+Version=1
+]
+[
+ObjTp=FSgntr
+Sgntr=UserMacro
+RelVrs=4.04.03
+IntStrVrs=2
+MinSMWVrs=2.05.04
+
+MinTIOVrs=0
+SavedBy=SMW4.03.20
+]
+[
+ObjTp=Hd
+S0Nd=1
+S1Nd=2
+SLNd=3
+PrNm=Pulse Toggle.umc
+CmVr=3.03
+DbVr=58.00.002.00
+DvcDbVr=77.02.001.00
+OpVr=MC3 1.500.0013
+PgmNm=MAD
+DlrNm=AVSOURCE
+CltNm=Pulse Toggle
+JpNo=1
+Incl=362,378,380,405,407,408,409,478,522,537,554,586,590,611,624,767,830,883,1032,1062,1079,1134,1157,1199,1220,1222,1299,1348,1439,1472,1473,1499,1746,1803,1975,2229,2354,2514,2523,2532,3708,3902,3912,3918,3925,1766,2574,2651,2817,2886,2938,2947,3181,3197,3233,3710,3735,3736,3816,3888,4176,4308,4476,4591,4769,
+SmVr=1007
+DvVr=1007
+TpN1=1
+TpN2=2
+TpN3=3
+TpN4=4
+TpN5=5
+APg=1
+FltTmp=1
+FpCS=0
+EnType=0
+ZeroOnIoOk=0
+SGMethod=1
+Cmn1=-{{**{{set}}**}} pulses the out signal high for the duration of "Pulse Time"\\
+Cmn2=-{{**{{reset}}**}} pulses the {{**{{out*}}**}} signal high for the duration of "Pulse||1
+Cmn3=Time"\\-clock swaps the state of out and {{**{{out*}}**}} and pulses for the||1
+Cmn4=duration of "Pulse Time"\\-out and {{**{{out*}}**}} will pulse regardles of||1
+Cmn5=the state of the previous clock pulse\\Note: care must be taken||1
+Cmn6=when selecting the length of "Pulse Time"\\and how you use the module||1
+Cmn7=because it may be possible to\\make both out and {{**{{out*}}**}} high at||1
+Cmn8=the same time
+]
+[
+ObjTp=Bk
+Nm1=\
+Sx1=0
+Sy1=0
+Mx1=0
+]
+[
+ObjTp=Bw
+H=1
+Lx=0
+Ly=0
+Rx=1400
+Ry=923
+Xm=-1
+Ym=-1
+SH=12
+Z=100
+Ht=3
+Hi=1
+]
+[
+ObjTp=Symbol
+Name=Pulse Toggle
+Code=1
+SmplCName=Pulse Toggle.umc
+Smpl-C=3
+CompilerTimePrecision=Single_Or_Double_Precision
+Hint=Pulse Toggle
+SMWRev=2.05.22
+TIORev=0
+HelpID=1055
+APg=1
+StdCmd=0
+FltTmp=1
+FpCS=0
+NumFixedInputs=3
+NumFixedOutputs=2
+NumFixedParams=1
+MinVariableInputs=0
+MinVariableInputsList2=0
+MinVariableInputsList3=0
+MinVariableOutputs=0
+MinVariableOutputsList2=0
+MinVariableOutputsList3=0
+MinVariableParams=0
+SymbolTree=46
+UserSymTreeName=AVSOURCE
+ParamSigType1=Time|Constant
+InputCue1=[set]
+InputCue2=[reset]
+InputCue3=clock
+OutputCue1=pulse_out
+OutputCue2=pulse_[out*]
+ParamCue1=Pulse Time
+MPi=3
+Pi1=1
+Pi2=2
+Pi3=3
+MPp=1
+Pp1=4
+FileName=Pulse Toggle.umc
+EncodingType=0
+ZeroOnIoOk=0
+]
+FeSchVr=001
+¶¬ÊäæÒŞÜzbº¶ÄÔ¨àzŒ¦ÎÜèä¦ÎÜèäzªæÊäšÂÆäŞ¤ÊØ¬äæzh\`h\`f’Üè¦èä¬äæzdšÒÜ¦š®¬äæzd\`j\<d:d>šÒÜ¨’¬äæz`¦ÂìÊÈ„òz¦š®h\`f\d`º¶ÄÔ¨àzÈ¦`œÈzb¦bœÈzd¦˜œÈzf äœÚz êØæÊ@¨Ş<d:Î>ØÊ\êÚÆ†Ú¬äzf\`fˆÄ¬äzjp\<d:`>\<d:`>d\<d:`>ˆìÆˆÄ¬äz<d:n>\`d\<d:`>b\<d:`>à¬äzš†f@b\j<d:`>\<d:`>bf ÎÚœÚzš‚ˆˆØäœÚz‚¬¦ª¤†Š†ØèœÚz êØæÊ@¨Ş<d:Î>ØÊ”àœŞzb’ÜÆØzfldXfnpXfp`Xh`jXh`nXh`pXh`rXhnpXj<d:d>XjfnX<d:j>hXjplXjr`Xl<d:b>XldhXnlnXpf`X<d:p>fXb`fdXb`ldXb`nrX<d:b>fhX<d:b>jnX<d:b><d:r>Xb<d:d>`Xb<f:d>Xbd<d:r>XbfhpXbhfrXbhndXbhnfXbh<d:r>XbnhlXbp`fXbrnjX<f:d>rXdfjhXdjbhXdjdfXdjfdXfn`pXfr`dXfrbdXfrbpXfrdjXbn<d:l>XdjnhXdljbXdpbnXd<d:p>lXdrfpXdrhnXfbpbXfbrnXfd<d:f>Xfnb`XfnfjXfnflXfpblXf<f:p>XhbnlXhf`pX<d:h>nlXhjrbXhnlrX¦Ú¬äzb<d:`>nˆì¬äzb<d:`>n¨àœbzb¨àœdzd¨àœfzf¨àœhzh¨àœjzj‚ ÎzbŒØè¨ÚàzbŒà†¦z`ŠÜ¨òàÊz`´ÊäŞÜ’ŞÖz`¦šÊèĞŞÈzb†ÚÜbzZ<d:ö><d:T><d:ö>æÊè<d:ú><d:T><d:ú>@àêØæÊæ@èĞÊ@Şêè@æÒÎÜÂØ@ĞÒÎĞ@ÌŞä@èĞÊ@ÈêäÂèÒŞÜ@ŞÌ@D êØæÊ@¨ÒÚÊD<d:¸>†ÚÜdzZ<d:ö><d:T><d:ö>äÊæÊè<d:ú><d:T><d:ú>@àêØæÊæ@èĞÊ@<dT  TrhrhTŠ  T:ö><d:T><d:ö>ŞêèT<d:ú><d:T><d:ú>@æÒÎÜÂØ@ĞÒÎĞ@ÌŞä@èĞÊ@ÈêäÂèÒŞÜ@ŞÌ@D êØæÊ<d:ø>b†ÚÜfz¨ÒÚÊD<d:¸>ZÆØŞÆÖ@æîÂàæ@èĞÊ@æèÂèÊ@ŞÌ@Şêè@ÂÜÈ@<d:ö><d:T><d:ö>ŞêèT<d:ú><d:T><d:ú>@ÂÜÈ@àêØæÊæ@ÌŞä@èĞÊ<d:ø>b†ÚÜhzÈêäÂèÒŞÜ@ŞÌ@D êØæÊ@¨ÒÚÊD<d:¸>ZŞêè@ÂÜÈ@<d:ö><d:T><d:ö>ŞêèT<d:ú><d:T><d:ú>@îÒ<d:Ø>@àêØæÊ@äÊÎÂäÈØÊæ@ŞÌ<d:ø>b†ÚÜjzèĞÊ@æèÂèÊ@ŞÌ@èĞÊ@àäÊìÒŞêæ@ÆØŞÆÖ@àêØæÊ<d:¸>œŞèÊt@ÆÂäÊ@Úêæè@ÄÊ@èÂÖÊÜ<d:ø>b†ÚÜlzîĞÊÜ@æÊØÊÆèÒÜÎ@èĞÊ@ØÊÜÎèĞ@ŞÌ@D êØæÊ@¨ÒÚÊD<d:¸>ÂÜÈ@ĞŞî@òŞê@êæÊ@èĞÊ@ÚŞÈêØÊ<d:ø>b†ÚÜnzÄÊÆÂêæÊ@Òè@ÚÂò@ÄÊ@àŞ<d:æ>ÒÄØÊ@èŞ<d:¸>ÚÂÖÊ@ÄŞèĞ@Şêè@ÂÜÈ@<d:ö><d:T><d:ö>ŞêèT<d:ú><d:T><d:ú>@ĞÒÎĞ@Âè<d:ø>b†ÚÜpzèĞÊ@æÂÚÊ@èÒÚÊº¶ÄÔ¨àz„ÖœÚbz¸¦ğbz`¦òbz`šğbz`º¶ÄÔ¨àz„îzb˜ğz`˜òz`¤ğzbh<d:`>¤òzrdf°ÚzZb²ÚzZb¦zbd´zb<d:`>èzfÒzbº¶ÄÔ¨àz¦òÚÄŞØœÂÚÊz êØæÊ@¨Ş<d:Î>ØÊ†ŞÈÊzb¦ÚàØ†œÂÚÊz êØæÊ@¨Ş<d:Î>ØÊ\êÚÆ¦ÚàØZ†zf†ŞÚàÒØÊä¨ÒÚÊ äÊÆÒæÒŞÜz¦ÒÜÎØÊ¾ä¾ˆŞêÄØÊ¾ äÊÆÒæÒŞÜÒÜèz êØæÊ@¨Ş<d:Î>ØÊ¦š®¤Êìzd\`j\<d:d>¨’¤Êìz`ÊØà’ˆzb`<d:j>‚ Îzb¦èÈ†ÚÈz`ŒØè¨ÚàzbŒà†¦z`œêÚŒÒğÊÈ’ÜàêèæzfœêÚŒÒğÊÈêèàêèæzdœêÚŒÒğÊÈ ÂäÂÚæzbšÒÜ¬ÂäÒÂÄØÊ’Üàêèæz`šÒÜ¬ÂäÒÂÄØÊ’Üàêèæ˜Òæèdz`šÒÜ¬ÂäÒÂÄØÊ’Üàêèæ˜Òæèfz`šÒÜ¬ÂäÒÂÄØÊêèàêèæz`šÒÜ¬ÂäÒÂÄØÊêèàêèæ˜Òæèdz`šÒÜ¬ÂäÒÂÄØÊêèàêèæ˜Òæèfz`šÒÜ¬ÂäÒÂÄØÊ ÂäÂÚæz`¦òÚÄŞØ¨ä<d:Ê>zhlªæÊä¦òÚ¨ä<d:Ê>œÂÚÊz‚¬¦ª¤†Š ÂäÂÚ¦ÒÎ¨òàÊbz¨ÒÚÊø†ŞÜæèÂÜè’Üàêè†êÊbz¶æÊèº’Üàêè†êÊdz¶äÊæÊèº’Üàêè†êÊfzÆØŞÆÖêèàêè†êÊbzàêØæÊ¾Şêèêèàêè†êÊdzàêØæÊ¾¶ŞêèTº ÂäÂÚ†êÊbz êØæÊ@¨ÒÚÊš Òzf Òbzb Òdzd Òfzfš àzb àbzhŒÒØÊœÂÚÊz êØæÊ@¨Ş<d:Î>ØÊ\êÚÆŠÜÆŞÈÒÜÎ¨òàÊz`´ÊäŞÜ’ŞÖz`º¶ÄÔ¨àz¦Úzb¦Ú†zbjnœÚz†ÊÜèäÂØ@†ŞÜèäŞØ@šŞÈêØÊæÄÔ¬Êäzb†ŒzdÜb’zbÜbzbÚ’zbÚzbèzbÚ zb bzº¶ÄÔ¨àz¦Úzd¦Ú†zbjnœÚzœÊèîŞäÖ@šŞÈêØÊæÄÔ¬Êäzb†ŒzdÜb’zbÜbzbÚ’zbÚzbèzbÚ zb bzº¶ÄÔ¨àz¦Úzf¦Ú†zbjnœÚzŠèĞÊäÜÊèÄÔ¬Êäzb†ŒzdÜb’zbÜbzbÚ’zbÚzbèzbÚ zb bzº¶ÄÔ¨àz¦Úzh¦Ú†zbjlœÚz˜ŞÎÒÆÄÔ¬Êäzb†ŒzdÚ†zl†bzn†dzr†fzb`†hzp†jz<d:b>†lzbdº¶ÄÔ¨àz¦Úzj¦Ú†zbjnœÚzˆÊÌÒÜÊ‚äÎêÚÊÜèæÄÔ¬Êäzb†ŒzdÜb’zbÜbzbÚ†zb†bzlÚ’zbÚzbèzbÚ zb bzº¶ÄÔ¨àz¦Úzl¦Ú†z<d:j>œÚz‚äÎêÚÊÜè@ˆÊÌÒÜÒèÒŞÜÄÔ¬Êäzb äzj†ŒzdÜb’zfÜbzdÚ’zf’bzh’dzj’fzlÚzdèzdbzndzpÚ zb bz êØæÊ@¨ÒÚÊš Òzf Òbzb Òdzd Òfzfš àzb àbzhº¶ÄÔ¨àz¦Úzn¦Ú†zbfœÚz¨Ş<d:Î>ØÊÄÔ¬Êäzb äzh†ŒzdÜb’zfÜbzdÚ’zf’bzh’dzj’fzlÚzdèzdbzrdzb`º¶ÄÔ¨àz¦Úzp¦Ú†zdbœÚzšêØèÒàØÊ@ÜÊ@¦ĞŞèæÄÔ¬Êäzb äzh†ŒzdÜb’zjÜbzhÚ’zj’dzr’fzbf’hzb`’jzbjÚzhèzhbz<d:b>dzbhfzbdhzblÚ zb bzF êØæÊ@¨ÒÚÊº¶ÄÔ¨àz¦Úzr¦Ú†zbœÚz‚œˆÄÔ¬Êäzb äzh†ŒzdÜb’zdÜbzb†ÚÜbzĞÒÚ’zd’bzr’dzhÚzbèzbbzbfº¶ÄÔ¨àz¦Úzb`¦Ú†zbœÚz‚œˆÄÔ¬Êäzb äzh†ŒzdÜb’zdÜbzb†ÚÜbzØŞÚ’zd’bzb`’dzjÚzbèzbbzbjº¶ÄÔ¨àz¦Úz<d:b>¦Ú†zd`œÚz„ê<d:Ì>ÊäÄÔ¬Êäzb äzh†ŒzdÜb’zjÜbzhÚ’zj’bzd’dz<d:b>’fzbh’hzbd’jzblÚzhèzhbzndznfzphzpº¶ÄÔ¨àz¦Úzbd¦Ú†zbdbœÚz†Ş<d:Ú>ÊÜèÄÔ¬Êäzb äzh†Œzd†ÚÜbz‚¬¦ª¤†Š@<d:˜>†@†ŞàòäÒÎĞè@d`bl<d:¸>¨ĞÊ@ÚÂèÊäÒÂØ@ÒÜ@îĞÒÆĞ@èĞÒæ@ÜŞèÒÆÊ@Â<d:à>ÊÂäæ<d:ø>b†ÚÜdzÒæ@èĞÊ@àäŞàÊäèò@ŞÌ@‚¬¦ª¤†Š@<d:˜>†X@îĞÒÆĞ@ÆØÂÒÚæ@ÆŞàòäÒÎĞè@êÜÈÊä@èĞÊ<d:ø>b†ÚÜfzØÂîæ@ŞÌ@èĞÊ@ªÜÒèÊÈ@¦èÂèÊæ@ŞÌ@‚ÚÊäÒÆÂ@ÒÜ@èĞÊ@ÊÜèÒäÊ@ÄŞÈò@ŞÌ@ÚÂèÊäÒÂØ<d:ø>b†ÚÜhzÂÜÈ@ÒÜ@Â<d:Ø>@àÂäèæ@èĞÊäÊŞÌX@äÊÎÂäÈØÊ<d:æ>@ŞÌ@èĞÊ@êæÊ@èŞ@îĞÒÆĞ@Òè@Òæ@ÄÊÒÜÎ<d:ø>b†ÚÜjzàêè\<d:@>‚Üò@êæÊX@ÒÜ@îĞŞØÊ@Şä@ÒÜ@àÂäèX@ŞÌ@èĞÒæ@ÚÂèÊäÒÂØ@Äò@ÂÜŞèĞÊä<d:ø>b†ÚÜlzàÂäèò@îÒèĞŞêè@èĞÊ@ÊğàäÊ<d:æ>@îäÒ<d:è>ÊÜ@àÊäÚÒ<d:æ>ÒŞÜ@ŞÌ@‚¬¦ª¤†Š@<d:˜>†@Òæ<d:ø>b†ÚÜnzàäŞĞÒÄÒèÊÈ\@‚¬¦ª¤†Š@<d:˜>†\@äÊæÊäìÊæ@Â<d:Ø>@äÒÎĞèæ@êÜÈÊä@Â<d:à>ØÒÆÂÄØÊ@ØÂîæ\Ú zb bz‚¬¦ª¤†Š@<d:˜>†@†ŞàòäÒÎĞè@d`blº¶ÄÔ¨àz¦ÎzhœÚz¶æÊèºº¶ÄÔ¨àz¦ÎzjœÚz¶äÊæÊèºº¶ÄÔ¨àz¦ÎzlœÚzÆØŞÆÖº¶ÄÔ¨àz¦ÎznœÚzàêØæÊ¾Şêèº¶ÄÔ¨àz¦ÎzpœÚzàêØæÊ¾¶ŞêèTºº¶ÄÔ¨àz¦ÎzrœÚzèŞÎ¾ĞÒº¶ÄÔ¨àz¦Îzb`œÚzèŞÎ¾ØŞº¶ÄÔ¨àz¦Îz<d:b>œÚzèŞÎ¾ĞÒ¾ÚŞæº¶ÄÔ¨àz¦ÎzbdœÚzèŞÎ¾ØŞ¾ÚŞæº¶ÄÔ¨àz¦ÎzbfœÚzèŞÎ¾ĞÒ¾ÂÜòîÂòº¶ÄÔ¨àz¦ÎzbhœÚzèŞÎ¾ĞÒ¾ÂÜòîÂò¾ÚŞæº¶ÄÔ¨àz¦ÎzbjœÚzèŞÎ¾ØŞ¾ÂÜòîÂòº¶ÄÔ¨àz¦ÎzblœÚzèŞÎ¾ØŞ¾ÂÜòîÂò¾ÚŞæº¶ÄÔ¨àzˆàzb¨àzdˆ¨zb¨äÎzbº¶ÄÔ¨àzˆàzd¨àzdˆ¨zb¨äÎzbº¶ÄÔ¨àzˆàzf¨àzdˆ¨zb¨äÎzbº¶ÄÔ¨àzˆàzh¨àzbˆz¨¤ªŠˆ¬z\bæœŒzhpˆœŒzblŠÜÆŒÚèz`ˆ¬˜Œzb¦ÎÜz`º

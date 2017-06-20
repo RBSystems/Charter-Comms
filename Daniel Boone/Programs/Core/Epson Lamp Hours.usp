@@ -1,0 +1,32 @@
+
+#SYMBOL_NAME "Epson Lamp Hours"
+
+STRING_INPUT Rx_From_Proj$[50];
+             
+STRING_OUTPUT Lamp_Hours;
+
+STRING Temp$[100];
+
+INTEGER Length, Location;
+
+
+CHANGE Rx_From_Proj$
+{
+	Wait (200)
+	{
+		IF( (BYTE(Rx_From_Proj$,1) = 0x4C) &&
+			(BYTE(Rx_From_Proj$,2) = 0x41) &&
+			(BYTE(Rx_From_Proj$,3) = 0x4D) &&
+			(BYTE(Rx_From_Proj$,4) = 0x50) &&
+			(BYTE(Rx_From_Proj$,5) = 0x3D))
+		{
+			TEMP$ = Rx_From_Proj$;
+			Location = FIND("\x0d", Rx_From_Proj$); 
+			TEMP$ = LEFT(TEMP$, (Location - 1)); 
+			Length = LEN(TEMP$);
+			Length = Length -5;
+			TEMP$ = RIGHT(TEMP$, Length);
+			MakeString (Lamp_Hours, "%s",TEMP$); 
+		}
+	}
+}

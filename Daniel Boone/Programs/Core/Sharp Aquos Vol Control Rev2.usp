@@ -1,0 +1,139 @@
+/*
+Dealer Name:
+System Name:
+System Number:
+Programmer:		Rob Pickering
+Comments:		Sharp Aquos LC Series Volume Control V2 makes device volume 0-100 instead os 0-60 like before
+*/
+
+#SYMBOL_NAME "Sharp Aquos LC Output Vol Control Rev2"
+// #HINT ""
+// #DEFINE_CONSTANT
+// #CATEGORY "" 
+// #DEFAULT_VOLATILE
+#DEFAULT_NONVOLATILE
+#ENABLE_STACK_CHECKING
+
+DIGITAL_INPUT 
+	_SKIP_,
+	Volume_Up,
+	Volume_Down,
+	Volume_Mute_Toggle,
+	Volume_Mute,
+	Volume_UnMute;
+
+// ANALOG_INPUT 
+// STRING_INPUT 
+// BUFFER_INPUT 
+
+DIGITAL_OUTPUT
+	_SKIP_, 
+	Volume_Mute_FB;
+
+ANALOG_OUTPUT
+    Volume_To_Analog;
+STRING_OUTPUT 
+	Volume_To_Sharp,
+	Volume_To_Text;
+
+SIGNED_INTEGER
+	Volume_Level,
+	Volume_Level_Device,
+	Volume_Muted,
+	Volume_Min_Level,
+	Volume_Max_Level,
+	Volume_Min_Device,
+	Volume_Max_Device;
+
+Function Set_Volume()
+{
+	Volume_Level_Device = ((Volume_Max_Device - Volume_Min_Device)*Volume_Level/Volume_Max_Level) + Volume_Min_Device;	
+
+	If (Volume_Level_Device < 10)
+	{
+		makestring(Volume_To_Sharp,"VOLM%d\x20\x20\x20\x0D",Volume_Level_Device); // Send Level to Sharp Vol Less than 10
+	}
+	Else
+	{
+		makestring(Volume_To_Sharp,"VOLM%d\x20\x20\x0D",Volume_Level_Device); // Send Level to Sharp Vol 10 or Greater
+	}    
+	 
+	makestring(Volume_To_Text,"%d%%",Volume_Level); // Send Level To Touch Panel Indirect Text
+	Volume_To_Analog = Volume_Level * 65535/100;
+}
+
+PUSH Volume_Up
+{
+	If (Volume_Muted = 1)
+	{
+		makestring(Volume_To_Sharp,"MUTE0\x20\x20\x20\x0D");
+		Volume_Mute_FB = 0;
+		Volume_Muted = 0;
+	}
+    Volume_Level=Volume_Level +1;
+
+	If (Volume_Level > Volume_Max_Level)
+	{
+		Volume_Level = Volume_Max_Level;
+	}
+	Set_Volume();
+}
+
+PUSH Volume_Down
+{
+	If (Volume_Muted = 1)
+	{
+		makestring(Volume_To_Sharp,"MUTE0\x20\x20\x20\x0D");
+		Volume_Mute_FB = 0;
+		Volume_Muted = 0;
+	}
+
+    Volume_Level=Volume_Level -1;
+
+	If (Volume_Level < Volume_Min_Level)
+	{
+		Volume_Level = Volume_Min_Level;
+	}
+	Set_Volume();
+}
+
+
+PUSH Volume_Mute_Toggle
+{
+	If (Volume_Muted = 1)
+	{
+		makestring(Volume_To_Sharp,"MUTE0\x20\x20\x20\x0D");
+		Volume_Mute_FB = 0;
+		Volume_Muted = 0;
+	}
+	Else
+	{
+		makestring(Volume_To_Sharp,"MUTE1\x20\x20\x20\x0D");
+		Volume_Mute_FB = 1;
+		Volume_Muted = 1;
+	}
+}
+
+PUSH Volume_Mute
+{
+		makestring(Volume_To_Sharp,"MUTE1\x20\x20\x20\x0D");
+		Volume_Mute_FB = 1;
+		Volume_Muted = 1;
+}
+
+PUSH Volume_UnMute
+{
+		makestring(Volume_To_Sharp,"MUTE2\x20\x20\x20\x0D");
+		Volume_Mute_FB = 0;
+		Volume_Muted = 0;
+}
+
+
+Function Main()
+{
+	Volume_Min_Level = 0;
+	Volume_Max_Level = 100;
+	Volume_Min_Device = 0;
+	Volume_Max_Device = 100;
+}
+

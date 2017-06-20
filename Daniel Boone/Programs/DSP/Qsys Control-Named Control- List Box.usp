@@ -1,0 +1,99 @@
+/*
+Dealer Name:Crestron
+System Name:
+System Number:
+Programmer:JMG
+Comments:
+*/
+
+//Compiler Directives
+// #ENABLE_DYNAMIC
+// #SYMBOL_NAME ""
+// #HINT ""
+// #DEFINE_CONSTANT
+#CATEGORY "0" 
+// #HELP_PDF_FILE ""
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+
+//Include Libraries
+
+#User_SimplSharp_Library "QsysControlV3"
+
+//IO Variables
+DIgital_Input Initialize, Poll_Enable;
+Analog_Input SelectItem;
+Analog_Output Value_Out;
+String_Output Selected_Item;
+String_Output String_Out[100];
+
+//Parameters
+Integer_Parameter Core_ID;
+String_Parameter Named_Control[100];
+//Global Variables
+Integer giID;
+String gsNC[100];
+Integer giListCount;
+
+QsysNamedControl NC;
+ 
+//Events
+EventHandler HandleReceivedData(QsysNameControlEvent sender,QsysNCDataChangeArgs args)
+{
+	if(args.rValue = 1)		//CV Response to Selected Item
+	{
+		Selected_Item = args.sValue;
+	}
+	else if(args.rValue = 0)
+	{
+		if(args.RawValue > 0)
+		{
+     		String_Out[args.iValue] = args.sValue;
+			if(giListCount != args.RawValue)
+			{
+				giListCount = args.RawValue;
+				Value_Out = args.RawValue;
+			} 
+        }
+		else
+		{
+			setarray(String_Out,"");
+			Value_Out = 0;
+			giListCount = 0;
+		} 
+		
+	}
+}
+Push Poll_Enable
+{
+ 	NC.Poll = 1;
+}
+Release Poll_Enable
+{		
+	NC.Poll = 0;
+}
+change SelectItem
+{
+	if(SelectItem > 0)
+	 	NC.ListValue = SelectItem;
+}
+
+
+Push Initialize
+{
+	NC.ListType = 1;
+ 	NC.ID = giID;
+	NC.NameC = gsNC;	//Add Named Control to Core's Named Control Dictionary.		
+	RegisterEvent(NC, OnDataReceived, HandleReceivedData);
+}
+Function Main()
+{
+    // TODO:  Add code here
+    // Initialize declared global and local variables/arrays as needed.
+
+     WaitForInitializationComplete();
+	giID = Core_ID;
+	gsNC = Named_Control;        
+}
+

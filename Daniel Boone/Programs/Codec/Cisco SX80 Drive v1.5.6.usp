@@ -1,0 +1,2131 @@
+/*******************************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+*******************************************************************************************/
+/*
+Dealer Name:	Crestron Electronics, Inc.
+System Name:
+System Number:
+Programmer:		PAC
+Comments:
+*/
+/*******************************************************************************************
+  Compiler Directives
+  (Uncomment and declare compiler directives as needed)
+*******************************************************************************************/
+// #ENABLE_DYNAMIC
+#SYMBOL_NAME "Cisco SX-80 Drive v1.5.6"
+// #HINT ""
+#DEFINE_CONSTANT	ciTOUCHWAIT						1500	//15 seconds
+#DEFINE_CONSTANT	ciCLEARDISCONNECTEDCALLWAITTIME	800
+
+#DEFINE_CONSTANT	ciRECEIVEBUFFERSIZE				30000
+#DEFINE_CONSTANT	ciCONSOLEBUFFER					200
+
+#DEFINE_CONSTANT	ciMINCAMERAPRESET				1
+#DEFINE_CONSTANT	ciMAXCAMERAPRESET				15
+#DEFINE_CONSTANT	ciMAXCALLS						3
+#DEFINE_CONSTANT	ciMINFARENDSOURCE				0
+#DEFINE_CONSTANT	ciMAXFARENDSOURCE				15
+#DEFINE_CONSTANT	ciMINVOLUME						0
+#DEFINE_CONSTANT	ciMAXVOLUME						100
+#DEFINE_CONSTANT	ciPHONEBOOKLIMIT				20
+#DEFINE_CONSTANT	ciPHONEBOOKMAXENTRIES			2000
+#DEFINE_CONSTANT	ciPHONEBOOKMAXMETHODS			4000
+#DEFINE_CONSTANT	ciPHONEBOOKMAXRETRIES			5
+#DEFINE_CONSTANT	ciMAXENTRIESDISPLAY				250
+#DEFINE_CONSTANT	ciPHONEBOOKMAXSEARCHRESULTS		50
+
+#DEFINE_CONSTANT	ciNEWSEARCHMAXRESULTS			202
+#DEFINE_CONSTANT	ciNEWSEARCHMAX					200
+
+#DEFINE_CONSTANT	csCRLF							"\x0D\x0A"
+#DEFINE_CONSTANT	csFOLDERTAG						"[+] "
+// #CATEGORY "" 
+// #PRINT_TO_TRACE
+// #DIGITAL_EXPAND 
+// #ANALOG_SERIAL_EXPAND 
+// #OUTPUT_SHIFT 
+// #HELP_PDF_FILE ""
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+// #ENABLE_TRACE
+/*
+#HELP_BEGIN
+   (add additional lines of help lines)
+#HELP_END
+*/
+/*******************************************************************************************
+  Include Libraries
+*******************************************************************************************/
+// #CRESTRON_LIBRARY ""
+#USER_SIMPLSHARP_LIBRARY "Cisco SX80 Corporate Phone Book"
+#USER_SIMPLSHARP_LIBRARY "Cisco SX80 Phone Book"
+/*******************************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+  (Uncomment and declare inputs and outputs as needed)
+*******************************************************************************************/
+DIGITAL_INPUT	Get_Processor_Info, Far_End_Camera_Preset_Go,
+				Far_End_Camera_Tilt_Up, Far_End_Camera_Tilt_Down,
+				Far_End_Camera_Pan_Left, Far_End_Camera_Pan_Right,
+				Far_End_Camera_Zoom_In, Far_End_Camera_Zoom_Out, Far_End_Camera_Stop,
+				Far_End_Select_Source_Go, Dial, Answer_Incoming_Call, Reject_Incoming_Call,
+				Get_Phone_Book, Top_Level, Up_One_Level, Phone_Book_Dial,
+				Phone_Book_Clear_Selected, SIP_Enabled, H323_Enabled,
+				New_Corporate_Search_Up_One_Level, New_Corporate_Search_Top,
+				New_Corporate_Search_Clear_Search, New_Corporate_Search_Dial,
+				New_Corporate_Search_Cancel_Selected_Item, Enable_Call_Disconnect_Delay,
+				Join, Hold_All, Resume_All, Picture_Layout_Custom, New_Corporate_Search_Start;
+ANALOG_INPUT	Far_End_Camera_Preset_Number_In, Connected_Call_Select_Number_In,
+				Far_End_Source_Number_In, Volume_Level_In, Phone_Book_Select_Entry_In,
+				New_Corporate_Search_Selected_Item_In;
+BUFFER_INPUT	From_Console[ciCONSOLEBUFFER], From_Device[ciRECEIVEBUFFERSIZE];
+STRING_INPUT	Call_Rate[20], Call_Protocol[20], Call_Type[20], Dial_Number[100],
+				Picture_Layout_Custom_Name_In[100];
+STRING_INPUT	DTMF_Key[1], Phone_Book_Type_In[25];
+string_INPUT	Phone_Book_Search_Text_In[50];
+STRING_INPUT	New_Corporate_Search_Text_In[50];
+DIGITAL_INPUT	Hang_Up_Call[ciMAXCALLS], Hold_Call[ciMAXCALLS], Resume_Call[ciMAXCALLS];
+
+DIGITAL_OUTPUT	Incoming_Call_Fb, Phone_Book_Download_Busy, Phone_Book_At_Top_Level,
+				Selected_Item_Is_Contact, Search_Is_Busy,
+				New_Corporate_Search_Not_On_Top_Level,
+				New_Corporate_Search_Dial_Error,
+				New_Search_Selected_Item_Is_Contact, New_Corporate_Search_Busy,
+				Message_Alert_IsActive, Message_Prompt_IsActive, Message_Prompt_Option1_IsActive,
+				Message_Prompt_Option2_IsActive, Message_Prompt_Option3_IsActive,
+				Message_Prompt_Option4_IsActive, Message_Prompt_Option5_IsActive;
+ANALOG_OUTPUT	Connected_Call_Selected_Number_Value, Volume_Level_Fb_Out,
+				Phone_Book_Total_Rows, Number_Of_Active_Calls,
+				New_Corporate_Search_Selected_Item_Out,
+				New_Corporate_Search_Deselect_Item_Out,
+				New_Corporate_Search_Total_Results_Count,
+				New_Corporate_Search_Total_Results;
+STRING_OUTPUT	To_Console, To_Device, To_Module, To_OBTP_Module,
+				Incoming_Call_Display_Name, Incoming_Call_Remote_Number,
+				Incoming_Call_Call_Type, Incoming_Call_Call_Id, Selected_Entry_Name_Text,
+				Selected_Entry_Number_Text, Phone_Book_Folder_Name_Text,
+				New_Corporate_Search_Path_Text, New_Corporate_Search_Text,
+				New_Corporate_Search_Dial_Error_Message,
+				New_Corporate_Search_Selected_Item_Name_Text,
+				New_Corporate_Search_Selected_Item_Number_Text,
+				New_Corporate_Search_Results_Display_Range_Text, Message_Alert_Text,
+				Message_Prompt_Title, Message_Prompt_Text, Message_Prompt_Option1_Text,
+				Message_Prompt_Option2_Text, Message_Prompt_Option3_Text,
+				Message_Prompt_Option4_Text, Message_Prompt_Option5_Text,
+				System_Name, System_IP_Address, System_H323_ID, System_E164_Alias, System_SIP_URI;
+DIGITAL_OUTPUT	Connected_Call_Connected[ciMAXCALLS], Connected_Call_Is_On_Hold[ciMAXCALLS];
+STRING_OUTPUT	Connected_Call_Display_Name[ciMAXCALLS],
+				Connected_Call_Remote_Number[ciMAXCALLS],
+				Connected_Call_Status[ciMAXCALLS], Connected_Call_Call_Type[ciMAXCALLS],
+				Connected_Call_Call_ID[ciMAXCALLS],
+				Phone_Book_Entry_Name_Text[251],
+				New_Corporate_Search_Results_Name_Text[ciNEWSEARCHMAXRESULTS];
+/*******************************************************************************************
+  Structure Definitions
+  (Uncomment and define structure definitions as needed)
+  Note:  Be sure to initialize all declared STRING variables as needed
+         For example, in Function Main: struct.myString = "";
+*******************************************************************************************/
+STRUCTURE Calls
+{
+	INTEGER CallId;
+	INTEGER Connected;
+	INTEGER OnHold;
+	STRING	DisplayName[50];
+	STRING	RemoteNumber[100];
+	STRING	CallType[20];
+	STRING	Status[25];
+};
+
+Calls ConnectedCall[ciMAXCALLS];
+//IncomingCall.Connected will be used to show the incoming call subpage
+Calls IncomingCall;
+/*******************************************************************************************
+  Global Variables
+  (Uncomment and declare global variables as needed)
+  Note:  Be sure to initialize all declared STRING variables as needed
+         For example, in Function Main: myString = "";
+*******************************************************************************************/
+INTEGER	iTouchExperimental, iTouchRegistered, iConsoleSent, iSelectedCall, iFoundLAN,
+		iPhoneBookDownloadBusy, iPhoneBookRequestOffSet, iPhoneBookRequestLimit, iFlag,
+		iFolderRequested, iNextAvailableEntry, iNextAvailableMethod, fiTempEntryNum,
+		iLastContactItem, iLastContactMethod, iReceivingPhoneBook, iOnTopLevel, iFlag1,
+		iPhoneBookRequestErrorCount, iSelectedEntry, iSearchResultsCount, iConnectedCallsCount,
+		iSearchResults[ciPHONEBOOKMAXSEARCHRESULTS], iSearchActive, iSearchBusy, iNewSearchText,
+		iProcessingSearchResults, iNoEntries, bTotalRowsZero, iTotalEntriesReceived,
+		iPhoneBookResultsCount, phoneBookDisplayCount, currentVolume, requestTimeOutCounter;
+STRING	sMACAddress[25], sProcessorType[50], sFirmwareVersion[50], sTempReceive[2500],
+		sPhoneBookType[25], sSearchText[50], sCallRate[20], sCallType[20],
+		sCallProtocol[20], sDialNumber[100], lastCommandProcessed[250], sNewSearchText[50],
+		sSelectedEntryType[25];
+/*******************************************************************************************
+  New Corporate Phone Book Search
+*******************************************************************************************/
+Corporate_Phone_Book sx80CorpSearch;
+PhoneBookHelper sx80PhoneBook;
+SIGNED_LONG_INTEGER newCorpSearchCurrentLevel;
+INTEGER resultsCount, CorpSearchInProgress, newSearchSelectedItem;
+STRING	pathText[75], newSearchSearchText[50], newSearchDialErrorMessage[50],
+		newSearchContactType[15], sNewSearchSearchString[50];
+/*******************************************************************************************
+  Functions
+  (Add any additional functions here)
+  Note:  Functions must be physically placed before the location in
+         the code that calls them.
+*******************************************************************************************/
+Function fTouchPanelConfirm()
+{
+	if((iTouchRegistered = 0) && (iTouchExperimental = 0))
+	{
+		makestring(To_Device, "xCommand Peripherals Connect Type: TouchPanel ID: \x22%s\x22 HardwareInfo: \x22Crestron %s\x22 SoftwareInfo: \x22%s\x22\n", sMACAddress, sProcessorType, sFirmwareVersion);
+	}
+	else if((iTouchRegistered = 0) && (iTouchExperimental = 1))
+	{
+		makestring(To_Device, "xCommand Experimental Peripherals Connect Type: TouchPanel ID: %s HardwareInfo: \x22Crestron %s\x22 SoftwareInfo: \x22%s\x22\n", sMACAddress, sProcessorType, sFirmwareVersion);
+	}
+	else if((iTouchRegistered = 1) && (iTouchExperimental = 0))
+	{
+		makestring(To_Device, "xCommand Peripherals HeartBeat ID: \x22%s\x22\n", sMACAddress);
+	}
+	else if((iTouchRegistered = 1) && (iTouchExperimental = 1))
+	{
+		makestring(To_Device, "xCommand Experimental Peripherals HeartBeat ID: \x22%s\x22\n", sMACAddress);
+	}
+	wait(ciTOUCHWAIT, wTouchWait)
+	{
+		fTouchPanelConfirm();
+	}
+}
+
+String_Function sfProcessConsole(string fsData)
+{
+	integer fiMarker1, fiMarker2, fiMarker3;
+	string fsReturn[25];
+	
+	fsReturn = "";
+	fiMarker1 = 0;
+	fiMarker2 = 0;
+	fiMarker3 = 0;
+	/******************************************************
+	*ver responses                                        *
+	*PRO2 Cntrl Eng [v4.008.0008 (Oct 22 2013), #00000000]*
+	*PRO3 Cntrl Eng [v1.008.0040 (Nov 11 2013), #00A3C06A]*
+	******************************************************/
+	if((iConsoleSent = 1) && (find("Cntrl Eng", fsData) > 0))
+	{
+		fiMarker1 = find("\x20", fsData);
+		fiMarker2 = find("[", fsData);
+		fiMarker3 = find("]", fsData);
+		sProcessorType = left(fsData, fiMarker1 - 1);
+		sFirmwareVersion = mid(fsData, fiMarker2 + 1, fiMarker3 - fiMarker2 - 1);
+		if(getseries() = 3)
+		{
+			fsReturn = "macadd\n";
+			iConsoleSent = 3;
+			iFoundLAN = 1;
+		}
+		else
+		{
+			fsReturn = "est\n";
+			iConsoleSent = 2;
+		}
+	}
+	/******************************************************
+	*ipconfig response (3 Series)						  *
+	*Ethernet Adapter [LAN]:							  *
+	*	 Link Status ....... : OK 						  *
+	*	 DHCP .............. : OFF 						  *
+	*	 MAC Address(es).... : 00.10.7f.43.7d.1d 		  *
+	*	 IP Address ........ : 192.168.100.124 			  *
+	*	 Subnet Mask ....... : 255.255.255.0 			  *
+	*	 IPv6 Address....... :  						  *
+	*	 Default Gateway ... : 192.168.100.1 			  *
+	*													  *
+	*	 DNS Servers........ : 209.18.47.61 (static) 	  *
+	*	                       209.18.47.62 (static) 	  *
+	*	                        						  *
+	*													  *
+	*Ethernet Adapter [Control Subnet]:					  *
+	*	 Link Status ....... : No Link 					  *
+	*	 DHCP .............. : On (Server) 				  *
+	*	 MAC Address(es).... : 00.10.7f.43.7d.1e 		  *
+	*	 IP Address ........ : 172.22.0.1 				  *
+	*	 Subnet Mask ....... : 255.255.0.0 				  *
+	*	 IPv6 Address....... :  						  *
+	*	 Default Gateway ... : 172.22.0.2 				  *
+	*													  *
+	*	 DNS Servers........ : 172.22.0.2 (DHCP) 		  *
+	******************************************************/
+	else if((iConsoleSent = 3) && (find("Ethernet Adapter [LAN]:", fsData) > 0))
+	{
+		iFoundLAN = 1;
+		fsReturn = "";
+	}
+	else if((iConsoleSent = 3) && (iFoundLAN = 1) && (find("MAC address", fsData) > 0))
+	{
+		iFoundLAN = 0;
+		fiMarker1 = find(":", fsData);
+		fiMarker2 = reversefind("\x20", fsData, fiMarker1 + 3);
+		sMACAddress = mid(fsData, fiMarker1 + 2, len(fsData) - fiMarker1 - 4);
+		clearbuffer(From_Console);
+		iConsoleSent = 0;
+		fsReturn = "";
+		fTouchPanelConfirm();
+	}
+	/**************************************************************
+	*est (2 Series)												  *
+	*Ethernet Status: LAN A        LAN B						  *
+	*  Link Status:   OK           No Link 						  *
+	*  Link Speed:    100 Mbps     n/a							  *
+	*  Full Duplex:   YES          n/a							  *
+	*Ethernet Parameters:										  *
+	*  Enabled:     On											  *
+	*  MAC Address(es): 00.10.7f.00.67.cb  00.10.7f.00.67.cc	  *
+	*  IP Address:  192.168.100.136    192.168.000.011			  *
+	*  Subnet Mask: 255.255.255.000    255.255.255.255			  *
+	*  Def Router : 192.168.100.001								  *
+	*  DHCP:        Off											  *
+	*  WINS:        Off											  *
+	*  Host Name:   PRO2-00107F0067CB							  *
+	*  Domain Name: (none entered)								  *
+	*  SSL:         OFF,Off										  *
+	*DNS Server Information:									  *
+	*  No servers found.										  *
+	*Console Client Parameters:									  *
+	* Enabled: Off												  *
+	* Console Server IP Address: 0.0.0.0 						  *
+	* Console Server Port Number: 0 							  *
+	* Console Client Max Retries: 100 							  *
+	* Console Client Idle Timeout (In Seconds): 900 			  *
+	* Console Client Disconnected. 								  *
+	*IP Table:													  *
+	* CIP_ID  Type    Status     DevID  Port   IP Address/SiteName*
+	**************************************************************/
+	else if((iConsoleSent = 2) && (find("MAC Address", fsData) > 0))
+	{
+		fiMarker1 = find(":", fsData);
+		fiMarker2 = find("\x20", fsData, fiMarker1 + 3);
+		sMACAddress = mid(fsData, fiMarker1 + 3, fiMarker2 - fiMarker1 - 3);
+		clearbuffer(From_Console);
+		iConsoleSent = 0;
+		fsReturn = "";
+		fTouchPanelConfirm();
+	}
+	else
+	{
+		fsReturn = "";
+	}
+
+	return(fsReturn);
+}
+
+Function fUpdateIncomingCallStatus()
+{
+	Incoming_Call_Fb = IncomingCall.Connected;
+	Incoming_Call_Display_Name = IncomingCall.DisplayName;
+	Incoming_Call_Remote_Number = IncomingCall.RemoteNumber;
+	Incoming_Call_Call_Type = IncomingCall.CallType;
+	makestring(Incoming_Call_Call_Id, "%u", IncomingCall.CallId);
+}
+
+function requestPhoneBookTimeOut()
+{
+	wait(3000, _requestPhoneBookWait)
+	{
+		requestTimeOutCounter = requestTimeOutCounter + 1;
+		if(requestTimeOutCounter >= 5)
+		{
+			sx80PhoneBook.CancelDownload();
+		}
+		else if(requestTimeOutCounter < 5)
+		{
+			sx80PhoneBook.ResendPhoneBookRequest();
+		}
+	}
+}
+
+Function fClearIncomingCall()
+{
+	IncomingCall.Connected = 0;
+	IncomingCall.RemoteNumber = "";
+	IncomingCall.DisplayName = "";
+	IncomingCall.CallType = "";
+	IncomingCall.Status = "";
+	IncomingCall.CallId = 0;
+	IncomingCall.OnHold = 0;
+	fUpdateIncomingCallStatus();
+}
+
+Function fUpdateCallStatus(INTEGER fiCallNumber)
+{
+	INTEGER fiA;
+	
+	if((fiCallNumber > 0) && (fiCallNumber <= ciMAXCALLS))
+	{
+		Connected_Call_Connected[fiCallNumber] = ConnectedCall[fiCallNumber].Connected;
+		Connected_Call_Remote_Number[fiCallNumber] = ConnectedCall[fiCallNumber].RemoteNumber;
+		Connected_Call_Display_Name[fiCallNumber] = ConnectedCall[fiCallNumber].DisplayName;
+		Connected_Call_Call_Type[fiCallNumber] = ConnectedCall[fiCallNumber].CallType;
+		Connected_Call_Status[fiCallNumber] = ConnectedCall[fiCallNumber].Status;
+		Connected_Call_Is_On_Hold[fiCallNumber] = ConnectedCall[fiCallNumber].OnHold;
+		makestring(Connected_Call_Call_ID[fiCallNumber], "%u", ConnectedCall[fiCallNumber].CallId);
+	}
+	iConnectedCallsCount = 0;
+	for(fiA = 1 to ciMAXCALLS)
+	{
+		if(ConnectedCall[fiA].Connected = 1)
+		{
+			iConnectedCallsCount = iConnectedCallsCount + 1;
+		}
+	}
+	Number_Of_Active_Calls = iConnectedCallsCount;
+}
+
+Function fShiftConnectedCalls()
+{
+	integer a, b;
+	for(a = 1 to ciMAXCALLS - 1)
+	{
+		if(len(ConnectedCall[a].status) = 0)
+		{
+			for(b = a + 1 to ciMAXCALLS)
+			{
+				if(len(ConnectedCall[b].status) > 0)
+				{
+					ConnectedCall[a].Connected = ConnectedCall[b].Connected;
+					ConnectedCall[a].CallId = ConnectedCall[b].CallId;
+					ConnectedCall[a].RemoteNumber = ConnectedCall[b].RemoteNumber;
+					ConnectedCall[a].DisplayName = ConnectedCall[b].DisplayName;
+					ConnectedCall[a].CallType = ConnectedCall[b].CallType;
+					ConnectedCall[a].Status = ConnectedCall[b].Status;
+					ConnectedCall[a].OnHold = ConnectedCall[b].OnHold;
+					ConnectedCall[b].Connected = 0;
+					ConnectedCall[b].CallId = 0;
+					ConnectedCall[b].RemoteNumber = "";
+					ConnectedCall[b].DisplayName = "";
+					ConnectedCall[b].CallType = "";
+					ConnectedCall[b].Status = "";
+					ConnectedCall[b].OnHold = 0;
+					fUpdateCallStatus(a);
+					fUpdateCallStatus(b);
+					break;
+				}
+			}
+			if(b = ciMAXCALLS)
+			{
+				break;
+			}
+		}
+	}
+	fUpdateCallStatus(8);
+}
+
+Function fClearCall()
+{
+	INTEGER fiA;
+	
+	for(fiA = 1 to ciMAXCALLS)
+	{
+		if((lower(ConnectedCall[fiA].Status) = lower("Disconnected")) || (lower(ConnectedCall[fiA].Status) = lower("Idle")))
+		{
+			ConnectedCall[fiA].Connected = 0;
+			ConnectedCall[fiA].CallId = 0;
+			ConnectedCall[fiA].RemoteNumber = "";
+			ConnectedCall[fiA].DisplayName = "";
+			ConnectedCall[fiA].CallType = "";
+			ConnectedCall[fiA].Status = "";
+			ConnectedCall[fiA].OnHold = 0;
+			fUpdateCallStatus(fiA);
+		}
+	}
+	fShiftConnectedCalls();
+}
+
+String_Function sfRemoveQuotes(STRING fsData)
+{
+	INTEGER fiMarker1, fiMarker2;
+	STRING fsReturn[100];
+	
+	fiMarker1 = 0;
+	fiMarker2 = 0;
+	if(fsData = "\x22\x22")
+	{
+		fsReturn = "";
+	}
+	else
+	{
+		fiMarker1 = find("\x22", fsData);
+		if(fiMarker1 > 0)
+		{
+			fiMarker2 = find("\x22", fsData, fiMarker1 + 1);
+			if(fiMarker2 > fiMarker1)
+			{
+				fsReturn = mid(fsData, fiMarker1 + 1, fiMarker2 - (fiMarker1 + 1));
+			}
+			else
+			{
+				fsReturn = fsData;
+			}
+		}
+		else
+		{
+			fsReturn = fsData;
+		}
+	}
+	return(fsReturn);
+}
+
+Function fClearPhoneBookDisplay()
+{
+
+	INTEGER fiA;
+	
+	if(phoneBookDisplayCount <> 0)
+	{
+		for(fiA = 1 to ciMAXENTRIESDISPLAY + 1)
+		{
+			Phone_Book_Entry_Name_Text[fiA] = "";
+		}
+	}
+	phoneBookDisplayCount = 0;
+	iSelectedEntry = 0;
+	Selected_Entry_Name_Text = "";
+	Selected_Entry_Number_Text = "";
+	Phone_Book_Folder_Name_Text = "";
+}
+
+Function fDisplaySearchResults()
+{
+	INTEGER fiA, fiCount;
+	
+	try
+	{
+		Phone_Book_At_Top_Level = 1;
+		fiCount = min(sx80PhoneBook.searchResultsCount(), ciMAXENTRIESDISPLAY);
+		if(fiCount < sx80PhoneBook.searchResultsCount())
+		{
+			Phone_Book_Total_Rows = fiCount + 1;
+		}
+		else if(fiCount = 0)
+		{
+			phoneBookDisplayCount = 1;
+			Phone_Book_Total_Rows = 1;
+		}
+		else
+		{
+			Phone_Book_Total_Rows = fiCount;
+		}
+		if(fiCount > 0)
+		{
+			for(fiA = 1 to fiCount)
+			{
+				Phone_Book_Entry_Name_Text[fiA] = sx80PhoneBook.searchResultsList(fiA - 1);
+				phoneBookDisplayCount = fiA;
+				if(iNewSearchText = 1)
+				{
+					break;
+				}
+			}
+			if(fiCount < sx80PhoneBook.searchResultsCount())
+			{
+				phoneBookDisplayCount = fiCount + 1;
+				Phone_Book_Entry_Name_Text[fiCount + 1] = "More Entries Available. Refine Search.";
+			}
+		}
+		else
+		{
+			Phone_Book_Entry_Name_Text[1] = "No Results";
+		}
+		if(iNewSearchText = 1)
+		{
+			fClearPhoneBookDisplay();
+			iNewSearchText = 0;
+			sSearchText = sNewSearchText;
+			sNewSearchText = "";
+			sx80PhoneBook.startSearch(sSearchText);
+		}
+	}
+	catch
+	{
+		generateusererror("fDisplaySearchResults Error: %s", getexceptionmessage());
+	}
+}
+
+Function fDisplayPhoneBook()
+{
+	INTEGER fiA, fiDisplayCount;
+
+	fiDisplayCount = 0;
+	if(iOnTopLevel = 1)
+	{
+		Phone_Book_Folder_Name_Text = sPhoneBookType;
+		Phone_Book_At_Top_Level = 1;
+	}
+	else if(iOnTopLevel = 0)
+	{
+		Phone_Book_Folder_Name_Text = sx80PhoneBook.phoneBookList(0);
+		Phone_Book_At_Top_Level = 0;
+	}
+	if(sx80PhoneBook.phoneBookCount(iOnTopLevel) = 0)
+	{
+		Phone_Book_Total_Rows = 1;
+		Phone_Book_Entry_Name_Text[1] = "No Contacts";
+	}
+	else
+	{
+		fiDisplayCount = min(sx80PhoneBook.phoneBookCount(iOnTopLevel), ciMAXENTRIESDISPLAY);
+		phoneBookDisplayCount = fiDisplayCount;
+		if(fiDisplayCount < sx80PhoneBook.phoneBookCount(iOnTopLevel))
+		{
+			phoneBookDisplayCount = ciMAXENTRIESDISPLAY + 1;
+			Phone_Book_Total_Rows = ciMAXENTRIESDISPLAY + 1;
+		}
+		else
+		{
+			phoneBookDisplayCount = fiDisplayCount;
+			Phone_Book_Total_Rows = fiDisplayCount;
+		}
+		for(fiA = 1 to fiDisplayCount)
+		{
+			Phone_Book_Entry_Name_Text[fiA] = sx80PhoneBook.phoneBookList(fiA - 1);
+		}
+		if(fiDisplayCount < sx80PhoneBook.phoneBookCount(iOnTopLevel))
+		{
+			Phone_Book_Entry_Name_Text[ciMAXENTRIESDISPLAY + 1] = "More Entries Available. Refine Search.";
+		}
+	}
+}
+
+Function fCopyIncomingToConnected(INTEGER fiPointer)
+{
+	ConnectedCall[fiPointer].CallId = IncomingCall.CallId;
+	ConnectedCall[fiPointer].Connected = IncomingCall.Connected;
+	ConnectedCall[fiPointer].DisplayName = IncomingCall.DisplayName;
+	ConnectedCall[fiPointer].RemoteNumber = IncomingCall.RemoteNumber;
+	ConnectedCall[fiPointer].CallType = IncomingCall.CallType;
+	ConnectedCall[fiPointer].OnHold = IncomingCall.OnHold;
+}
+
+Function fClearIncomingCallWait()
+{
+	wait(ciCLEARDISCONNECTEDCALLWAITTIME, wClearIncomingCall)
+	{
+		fClearIncomingCall();
+	}
+}
+
+Function fClearDisconnectedCall()
+{
+	wait(ciCLEARDISCONNECTEDCALLWAITTIME, wClearDisconenctedCall)
+	{
+		fClearCall();
+	}
+}
+
+FUNCTION ResetMessagePrompt()
+{
+	Message_Prompt_IsActive = 0;
+	Message_Prompt_Title = "";
+	Message_Prompt_Text = "";
+	Message_Prompt_Option1_Text = "";
+	Message_Prompt_Option2_Text = "";
+	Message_Prompt_Option3_Text = "";
+	Message_Prompt_Option4_Text = "";
+	Message_Prompt_Option5_Text = "";
+	Message_Prompt_Option1_IsActive = 0;               
+	Message_Prompt_Option2_IsActive = 0;               
+	Message_Prompt_Option3_IsActive = 0;               
+	Message_Prompt_Option4_IsActive = 0;               
+	Message_Prompt_Option5_IsActive = 0; 
+}
+
+String_Function sfProcessFromDevice(string fsData)
+{
+	integer fiTempCallId, fiA, fiMarker1, fiMarker2, fiTempEntryNum;
+	INTEGER fiTempContactMethodNum;
+	string fsReturn[250], fsCommand[250];
+	
+	fsReturn = "";
+	if(lower(fsData) = lower("OK\x0D\x0A"))
+	{
+		fsData = "";
+		fsReturn = "";
+	}
+	else if(lower(fsData) = lower("** end\x0D\x0A"))
+	{
+		 To_OBTP_Module = sTempReceive;
+		if((lower(lastCommandProcessed) = lower("ResultSet ")) && (CorpSearchInProgress = off) && (iPhoneBookDownloadBusy = 1))
+		{
+			requestTimeOutCounter = 0;
+			sx80PhoneBook.DataReceivedEventArgs(sTempReceive);
+			iReceivingPhoneBook = 0;
+		}
+		else if(iProcessingSearchResults = 1)
+		{
+			sx80CorpSearch.processResponse(fsData);
+			iProcessingSearchResults = 0;
+		}
+	}
+	else if(lower(fsData) = lower("    XPath: /Peripherals/Connect\x0D\x0A"))
+	{
+		iTouchExperimental = 1;
+		iProcessingSearchResults = 0;
+		fsData = "";
+		fsReturn = "";
+	}
+	else if(lower(fsData) = lower("*r PeripheralsHeartBeatResult (status=Error): \x0D\x0A"))
+	{
+		iTouchRegistered = 0;
+		iProcessingSearchResults = 0;
+		fsData = "";
+		fsReturn = "";
+	}
+	else
+	{
+		fsCommand = remove("\x20", fsData);
+		if(lower(fsCommand) = "*c ")
+		{
+			To_Module = sTempReceive;
+			fsCommand = remove("\x20", fsData);
+			lastCommandProcessed = fsCommand;
+			if(lower(fsCommand) = lower("xConfiguration "))
+			{
+				fsCommand = remove("\x20", fsData);
+				if(lower(fsCommand) = lower("SystemUnit "))
+				{
+					fsCommand = remove("\x20", fsData);
+					if(lower(fsCommand) = lower("Name: "))
+					{
+						System_Name = left(fsData, len(fsData) - 2);
+					}
+				}
+				else if(lower(fsCommand) = lower("H323 "))
+				{
+					fsCommand = remove("\x20", fsData);
+					if(lower(fsCommand) = lower("Profile "))
+					{
+						fsCommand = remove("\x20", fsData);
+						if(fsCommand = "1 ")
+						{
+							fsCommand = remove("\x20", fsData);
+							if(lower(fsCommand) = lower("H323Alias "))
+							{
+								fsCommand = remove("\x20", fsData);
+								if(lower(fsCommand) = lower("ID: "))
+								{
+									System_H323_ID = left(fsData, len(fsData) - 2);
+								}
+								else if(lower(fsCommand) = lower("E164: "))
+								{
+									System_E164_Alias = left(fsData, len(fsData) - 2);
+								}
+							}
+						}
+					}
+				}
+				else if(lower(fsCommand) = lower("SIP "))
+				{
+					fsCommand = remove("\x20", fsData);
+					if(lower(fsCommand) = lower("Profile "))
+					{
+						fsCommand = remove("\x20", fsData);
+						if(fsCommand = "1 ")
+						{
+							fsCommand = remove("\x20", fsData);
+							if(lower(fsCommand) = lower(" UIR: "))
+							{
+								System_SIP_URI = left(fsData, len(fsData) - 2);
+							}
+						}
+					}
+				}
+			}
+			iProcessingSearchResults = 0;
+			fsData = "";
+			fsReturn = "";
+		}
+		else if(lower(fsCommand) = "*r ")
+		{
+			fsCommand = remove("\x20", fsData);
+			lastCommandProcessed = fsCommand;
+			//Bookings Results *r Bookings
+			if(lower(fsCommand) = lower("Bookings "))
+			{
+				To_OBTP_Module = sTempReceive;
+				iProcessingSearchResults = 0;
+				fsData = "";
+				fsReturn = "";
+			}
+			//Peripherals Connect Result *r PeripheralsConnectResult (status=OK):
+			else if(lower(fsCommand) = lower("PeripheralsConnectResult "))
+			{
+				if(find(lower("(status=OK):"), lower(fsData)) > 0)
+				{
+					iTouchRegistered = 1;
+				}
+				To_Module = sTempReceive;
+				iProcessingSearchResults = 0;
+				fsData = "";
+				fsReturn = "";
+			}
+			//Peripherals HeartBeat Results *r PeripheralsHeartBeatResult (status=OK):
+			else if(lower(fsCommand) = lower("PeripheralsHeartBeatResult "))
+			{
+				To_Module = sTempReceive;
+				iProcessingSearchResults = 0;
+				fsData = "";
+				fsReturn = "";
+			}
+			//PhonebookSearchReult *r PhonebookSearchResult
+			else if(lower(fsCommand) = lower("ResultSet "))
+			{
+				if(CorpSearchInProgress = off)
+				{
+					sx80PhoneBook.DataReceivedEventArgs(sTempReceive);
+				}
+				else
+				{
+					iProcessingSearchResults = 1;
+					sx80CorpSearch.processResponse(sTempReceive);
+				}
+			}
+			else
+			{
+				To_Module = sTempReceive;
+				iProcessingSearchResults = 0;
+				fsData = "";
+				fsReturn = "";
+			}
+		}
+		else if(lower(fsCommand) = "*s ")
+		{
+			iProcessingSearchResults = 0;
+			fsCommand = remove("\x20", fsData);
+			lastCommandProcessed = fsCommand;
+			//*s Audio Volume: 70
+			if(lower(fsCommand) = lower("Audio "))
+			{
+				fsCommand = remove("\x20", fsData);
+				if(lower(fsCommand) = lower("Volume: "))
+				{
+					currentVolume = atoi(fsData);
+					Volume_Level_Fb_Out = atoi(fsData);
+				}
+				To_module = sTempReceive;
+			}
+			else if(lower(fsCommand) = lower("Call "))
+			{
+				fsCommand = remove("\x20", fsData);
+				fiTempCallId = atoi(fsCommand);
+				fsCommand = remove("\x20", fsData);
+				if(lower(fsCommand) = lower("Direction: "))
+				{
+					for(fiA = 1 to ciMAXCALLS)
+					{
+						if(ConnectedCall[fiA].CallId = fiTempCallId)
+						{
+							break;
+						}
+					}
+					if((find("incoming", lower(fsData)) > 0) && (fiA = ciMAXCALLS + 1))
+					{
+						IncomingCall.CallId = fiTempCallId;
+					}
+				}
+				else if(lower(fsCommand) = lower("DisplayName: "))
+				{
+					fiMarker1 = find("\x22", fsData);
+					fiMarker2 = find("\x22", fsData, fiMarker1 + 1);
+					if(IncomingCall.CallId = fiTempCallId)
+					{
+						IncomingCall.DisplayName = mid(fsData, fiMarker1 + 1, fiMarker2 - fiMarker1 - 1);
+						fUpdateIncomingCallStatus();
+					}
+					else
+					{
+						for(fiA = 1 to ciMAXCALLS)
+						{
+							if(ConnectedCall[fiA].CallId = fiTempCallId)
+							{
+								ConnectedCall[fiA].DisplayName = mid(fsData, fiMarker1 + 1, fiMarker2 - fiMarker1 - 1);
+								fUpdateCallStatus(fiA);
+								break;
+							}
+							
+						}
+						if(fiA = ciMAXCALLS + 1)
+						{
+							for(fiA = 1 to ciMAXCALLS)
+							{
+								if(ConnectedCall[fiA].Status = "")
+								{
+									ConnectedCall[fiA].CallId = fiTempCallId;
+									ConnectedCall[fiA].DisplayName = mid(fsData, fiMarker1 + 1, fiMarker2 - fiMarker1 - 1);
+									fUpdateCallStatus(fiA);
+									break;
+								}
+							}
+						}
+					}
+				}
+				else if(lower(fsCommand) = lower("RemoteNumber: "))
+				{
+					fiMarker1 = find("\x22", fsData);
+					fiMarker2 = find("\x22", fsData, fiMarker1 + 1);
+					if(IncomingCall.CallId = fiTempCallId)
+					{
+						IncomingCall.RemoteNumber = mid(fsData, fiMarker1 + 1, fiMarker2 - fiMarker1 - 1);
+						fUpdateIncomingCallStatus();
+					}
+					else
+					{
+						for(fiA = 1 to ciMAXCALLS)
+						{
+							if(ConnectedCall[fiA].CallId = fiTempCallId)
+							{
+								ConnectedCall[fiA].RemoteNumber = mid(fsData, fiMarker1 + 1, fiMarker2 - fiMarker1 - 1);
+								fUpdateCallStatus(fiA);
+								break;
+							}
+						}
+						if(fiA = ciMAXCALLS + 1)
+						{
+							for(fiA = 1 to ciMAXCALLS)
+							{
+								if(ConnectedCall[fiA].Status = "")
+								{
+									ConnectedCall[fiA].CallId = fiTempCallId;
+									ConnectedCall[fiA].RemoteNumber = mid(fsData, fiMarker1 + 1, fiMarker2 - fiMarker1 - 1);
+									fUpdateCallStatus(fiA);
+									break;
+								}
+							}
+						}
+					}
+				}
+				else if(lower(fsCommand) = lower("CallType: "))
+				{
+					if(IncomingCall.CallId = fiTempCallId)
+					{
+						IncomingCall.CallType = mid(fsData, 1, len(fsData) - 2);
+						fUpdateIncomingCallStatus();
+					}
+					else
+					{
+						for(fiA = 1 to ciMAXCALLS)
+						{
+							if(ConnectedCall[fiA].CallId = fiTempCallId)
+							{
+								ConnectedCall[fiA].CallType = mid(fsData, 1, len(fsData) - 2);
+								fUpdateCallStatus(fiA);
+								break;
+							}
+						}
+						if(fiA = ciMAXCALLS + 1)
+						{
+							for(fiA = 1 to ciMAXCALLS)
+							{
+								if(ConnectedCall[fiA].Status = "")
+								{
+									ConnectedCall[fiA].CallId = fiTempCallId;
+									ConnectedCall[fiA].CallType = mid(fsData, 1, len(fsData) - 2);
+									fUpdateCallStatus(fiA);
+									break;
+								}
+							}
+						}
+					}
+				}
+				else if(lower(fsCommand) = lower("Status: "))
+				{
+					if((find(lower("Ringing"), lower(fsData)) > 0) && (IncomingCall.Status = ""))
+					{
+						IncomingCall.CallId = fiTempCallId;
+						IncomingCall.Connected = 1;
+						IncomingCall.Status = mid(fsData, 1, len(fsData) - 2);
+						fUpdateIncomingCallStatus();
+					}
+					else
+					{
+						for(fiA = 1 to ciMAXCALLS)
+						{
+							if(ConnectedCall[fiA].CallId = fiTempCallId)
+							{
+								ConnectedCall[fiA].Status = mid(fsData, 1, len(fsData) - 2);
+								if(lower(ConnectedCall[fiA].Status) = lower("Connected"))
+								{
+									ConnectedCall[fiA].Connected = 1;
+									if(fiA = 1)
+									{
+										iSelectedCall = 1;
+										Connected_Call_Selected_Number_Value = iSelectedCall;
+									}
+								}
+								else if(lower(ConnectedCall[fiA].Status) = lower("Idle"))
+								{
+									if(Enable_Call_Disconnect_Delay = 1)
+									{
+										fClearDisconnectedCall();
+									}
+									else
+									{
+										fClearCall();
+									}
+								}
+								if(lower(ConnectedCall[fiA].Status) = lower("OnHold"))
+								{
+									ConnectedCall[fiA].OnHold = 1;
+								}
+								else
+								{
+									ConnectedCall[fiA].OnHold = 0;
+								}
+								fUpdateCallStatus(fiA);
+								break;
+							}
+						}
+						if(fiA = ciMAXCALLS + 1)
+						{
+							for(fiA = 1 to ciMAXCALLS)
+							{
+								if(ConnectedCall[fiA].Status = "")
+								{
+									ConnectedCall[fiA].CallId = fiTempCallId;
+									ConnectedCall[fiA].Status = mid(fsData, 1, len(fsData) - 2);
+									if(ConnectedCall[fiA].CallId = IncomingCall.CallId)
+									{
+										fCopyIncomingToConnected(fiA);
+										fClearIncomingCall();
+									}
+									if(lower(ConnectedCall[fiA].Status) = lower("Connected"))
+									{
+										ConnectedCall[fiA].Connected = 1;
+										if(fiA = 1)
+										{
+											iSelectedCall = 1;
+											Connected_Call_Selected_Number_Value = iSelectedCall;
+										}
+									}
+									fUpdateCallStatus(fiA);
+									break;
+								}
+							}
+						}
+					}
+				}
+				else
+				{
+					To_Module = sTempReceive;
+					fsData = "";
+					fsReturn = "";
+				}
+			}
+			else if(lower(fsCommand) = lower("Network "))
+			{
+				fsCommand = remove("\x20", fsData);
+				if(fsCommand = "1 ")
+				{
+					fsCommand = remove("\x20", fsData);
+					if(lower(fsCommand) = lower("IPv4 "))
+					{
+						fsCommand = remove("\x20", fsData);
+						if(lower(fsCommand) = lower("Address: "))
+						{
+							System_IP_Address = left(fsData, len(fsData) - 2);
+						}
+					}
+				}
+			}
+			else
+			{
+				To_Module = sTempReceive;
+				fsData = "";
+				fsReturn = "";
+			}
+		}
+		else if(lower(fsCommand) = lower("*e "))
+		{
+			iProcessingSearchResults = 0;
+			fsCommand = remove("\x20", fsData);
+			lastCommandProcessed = fsCommand;
+			if(lower(fsCommand) = lower("CallDisconnect "))
+			{
+				fiMarker1 = find(lower("CallId:"), lower(fsData));
+				fiTempCallId = atoi(mid(fsData, fiMarker1, len("CallId:") + 10));
+				if(IncomingCall.CallId = fiTempCallId)
+				{
+					IncomingCall.Status = "Disconnected";
+					fUpdateIncomingCallStatus();
+					fClearIncomingCallWait();
+				}
+				else
+				{
+					for(fiA = 1 to ciMAXCALLS)
+					{
+						if(ConnectedCall[fiA].CallId = fiTempCallId)
+						{
+							ConnectedCall[fiA].Status = "Disconnected";
+							fUpdateCallStatus(fiA);
+							if(Enable_Call_Disconnect_Delay = 1)
+							{
+								fClearDisconnectedCall();
+							}
+							else
+							{
+								fClearCall();
+							}
+							break;
+						}
+					}
+				}
+			}
+			else if(lower(fsCommand) = lower("Bookings "))
+			{
+				To_OBTP_Module = sTempReceive;
+				fsData = "";
+				fsReturn = "";
+			}
+			else if(lower(fsCommand) = lower("Message "))
+			{
+				fsCommand = remove("\x20", fsData);	//remove everything up to the next space
+				
+				if(lower(fsCommand) = lower("Prompt "))
+				{
+					fsCommand = remove("\x20", fsData);	//remove everything up to the next space
+					
+					if((len(fsCommand) = 0) && (find(lower("Clear"), lower(fsData)) > 0))
+					{
+						ResetMessagePrompt();
+					}
+					else if(lower(fsCommand) = lower("Display "))
+					{
+						fsCommand = remove("\x20", fsData);	//remove everything up to the next space
+						if(lower(fsCommand) = lower("Title: "))
+						{
+							Message_Prompt_Title = sfRemoveQuotes(fsData);
+						}
+						else if(lower(fsCommand) = lower("Text: "))
+						{
+							Message_Prompt_Text = sfRemoveQuotes(fsData);
+							Message_Prompt_IsActive = 1;
+						}
+						else if(lower(fsCommand) = lower("Option.1: "))
+						{
+							Message_Prompt_Option1_Text = sfRemoveQuotes(fsData);
+							Message_Prompt_Option1_IsActive = 1;               
+						}
+						else if(lower(fsCommand) = lower("Option.2: "))
+						{
+							Message_Prompt_Option2_Text = sfRemoveQuotes(fsData);
+							Message_Prompt_Option2_IsActive = 1;               
+						}
+						else if(lower(fsCommand) = lower("Option.3: "))
+						{
+							Message_Prompt_Option3_Text = sfRemoveQuotes(fsData);
+							Message_Prompt_Option3_IsActive = 1;               
+						}
+						else if(lower(fsCommand) = lower("Option.4: "))
+						{
+							Message_Prompt_Option4_Text = sfRemoveQuotes(fsData);
+							Message_Prompt_Option4_IsActive = 1;               
+						}
+						else if(lower(fsCommand) = lower("Option.5: "))
+						{
+							Message_Prompt_Option5_Text = sfRemoveQuotes(fsData);
+							Message_Prompt_Option5_IsActive = 1;               
+						}
+					}
+					else if((lower(fsCommand) = lower("Cleared ")) || (lower(fsCommand) = lower("Clear ")))
+					{
+						ResetMessagePrompt();
+					}
+				}
+				else if(lower(fsCommand) = lower("Alert "))
+				{
+					if(find("Display Text:", fsData) > 0)
+					{
+						Message_Alert_Text = sfRemoveQuotes(fsData);
+						Message_Alert_IsActive = 1;
+					}
+					else if(find(lower("Cleared"), lower(fsData)) > 0)
+					{
+						Message_Alert_Text = "";
+						Message_Alert_IsActive = 0;
+					}
+				}
+			}
+		}
+		else
+		{
+			To_Module = sTempReceive;
+			iProcessingSearchResults = 0;
+			fsData = "";
+			fsReturn = "";
+		}
+	}
+	return(fsReturn);
+}
+
+Function fFarEndCameraMove(string fsDirection)
+{
+	if((ConnectedCall[iSelectedCall].Connected = 1) && (fsDirection = "Stop"))
+	{
+		makestring(To_Device, "xCommand FarEndControl Camera Stop CallId:%d\n", ConnectedCall[iSelectedCall].CallId);
+	}
+	else if(ConnectedCall[iSelectedCall].Connected = 1)
+	{
+		makestring(To_Device, "xCommand FarEndControl Camera Move CallId:%d Value:%s\n", ConnectedCall[iSelectedCall].CallId, fsDirection);
+	}
+}
+/*******************************************************************************************
+  Event Handlers
+  (Uncomment and declare additional event handlers as needed)
+*******************************************************************************************/
+PUSH Get_Processor_Info
+{
+	iConsoleSent = 1;
+	iFoundLAN = 1;
+	To_Console = "ver\n";
+}
+
+Release Far_End_Camera_Preset_Go
+{
+	if((ConnectedCall[iSelectedCall].Connected = 1) && (Far_End_Camera_Preset_Number_In >= ciMInCAMERAPRESET) && (Far_End_Camera_Preset_Number_In <= ciMAXCAMERAPRESET))
+	{
+		makestring(To_Device, "xCommand FarEndControl Preset Activate CallId:%d PresetId:%d\n", ConnectedCall[iSelectedCall].CallId, Far_End_Camera_Preset_Number_In);
+	}
+}
+
+Push Far_End_Camera_Tilt_Up
+{
+	fFarEndCameraMove("Up");
+}
+
+Push Far_End_Camera_Tilt_Down
+{
+	fFarEndCameraMove("Down");
+}
+
+Push Far_End_Camera_Pan_Left
+{
+	fFarEndCameraMove("Left");
+}
+
+Push Far_End_Camera_Pan_Right
+{
+	fFarEndCameraMove("Right");
+}
+
+Push Far_End_Camera_Zoom_In
+{
+	fFarEndCameraMove("ZoomIn");
+}
+
+Push Far_End_Camera_Zoom_Out
+{
+	fFarEndCameraMove("ZoomOut");
+}
+
+Push Far_End_Camera_Stop
+{
+	fFarEndCameraMove("Stop");
+}
+
+Release Far_End_Select_Source_Go
+{
+	if((ConnectedCall[iSelectedCall].Connected = 1) && (Far_End_Source_Number_In >= ciMINFARENDSOURCE) && (Far_End_Source_Number_In <= ciMAXFARENDSOURCE))
+	{
+		makestring(To_Device, "xCommand FarEndControl Source Select CallId:%d SourceId:%d\n", ConnectedCall[iSelectedCall].CallId, Far_End_Source_Number_In);
+	}
+}
+
+Change Connected_Call_Select_Number_In
+{
+	if((Connected_Call_Select_Number_In <= ciMAXCALLS) && (Connected_Call_Select_Number_In <> iSelectedCall) && (ConnectedCall[Connected_Call_Select_Number_In].Connected = 1))
+	{
+		iSelectedCall = Connected_Call_Select_Number_In;
+		Connected_Call_Selected_Number_Value = iSelectedCall;
+	}
+	else
+	{
+		Connected_Call_Selected_Number_Value = iSelectedCall;
+	}
+}
+
+Change Volume_Level_In
+{
+	if((Volume_Level_In >= ciMINVOLUME) && (Volume_Level_In <= ciMAXVOLUME) && (Volume_Level_In <> currentVolume))
+	{
+		makestring(To_Device, "xCommand Audio Volume Set Level: %d\n", Volume_Level_In);
+	}
+}
+
+Change Phone_Book_Select_Entry_In
+{
+	if(iSearchActive = 1)
+	{
+		if(Phone_Book_Select_Entry_In > 0)
+		{
+			iSelectedEntry = Phone_Book_Select_Entry_In;
+			sx80PhoneBook.selectSearchEntry(iSelectedEntry - 1);
+		}
+	}
+	else
+	{
+		if(Phone_Book_Select_Entry_In > 0)
+		{
+			sx80PhoneBook.selectPhoneBookEntry(Phone_Book_Select_Entry_In - 1);
+		}
+	}
+}
+
+Push Phone_Book_Clear_Selected
+{
+	if(iSelectedEntry > 0)
+	{
+		iSelectedEntry = 0;
+		if(iSearchActive = 1)
+		{
+			sx80PhoneBook.clearSearchSelected();
+		}
+		else
+		{
+			sx80PhoneBook.clearSelected();
+		}
+	}
+}
+
+Change DTMF_Key
+{
+	if(len(ConnectedCall[iSelectedCall].Status) > 0)
+	{
+		makestring(To_device, "xCommand DTMFSend CallId:%d DTMFString:%s\n", ConnectedCall[iSelectedCall].CallId, DTMF_Key);
+	}
+}
+
+Push Dial
+{
+	if(len(sDialNumber) > 0)
+	{
+		makestring(To_Device, "xCommand Dial Number:%s %s %s %s\n", sDialNumber, sCallProtocol, sCallRate, sCallType);
+	}
+}
+
+Push Answer_Incoming_Call
+{
+	if(len(IncomingCall.Status) > 0)
+	{
+		makestring(To_Device, "xCommand Call Accept CallId:%d\n", IncomingCall.CallId);
+	}
+}
+
+Push Reject_Incoming_Call
+{
+	if(len(IncomingCall.Status) > 0)
+	{
+		makestring(To_Device, "xCommand Call Reject CallId:%d\n", IncomingCall.CallId);
+	}
+}
+
+PUSH Join
+{
+	To_Device = "xCommand Call Join\n";
+}
+
+PUSH Hold_All
+{
+	if(iConnectedCallsCount > 0)
+	{
+		To_Device = "xCommand Call HoldAll\n";
+	}
+}
+
+PUSH Hold_Call
+{
+	INTEGER eiTemp;
+	
+	eiTemp = getlastmodifiedarrayindex();
+	if(iConnectedCallsCount > 0)
+	{
+		if(ConnectedCall[eiTemp].OnHold = 0)
+		{
+			makestring(To_Device, "xCommand Call Hold CallId:%d\n", ConnectedCall[eiTemp].CallId);
+		}
+	}
+}
+
+PUSH Resume_All
+{
+	integer a;
+	if(iConnectedCallsCount > 0)
+	{
+		for(a = 1 to ciMAXCALLS)
+		{
+			if((ConnectedCall[a].CallId > 0) && (ConnectedCall[a].OnHold > 0))
+			{
+				makestring(To_Device, "xCommand Call Resume CallId:%d\n", ConnectedCall[a].CallId);
+			}
+		}
+	}
+}
+
+PUSH Resume_Call
+{
+	INTEGER eiTemp;
+	
+	eiTemp = getlastmodifiedarrayindex();
+	
+	if(iConnectedCallsCount > 0)
+	{
+		if((ConnectedCall[eiTemp].CallId > 0) && (ConnectedCall[eiTemp].OnHold > 0))
+		{
+			makestring(To_Device, "xCommand Call Resume CallId:%d\n", ConnectedCall[eiTemp].CallId);
+		}
+	}
+}
+
+Push Picture_Layout_Custom
+{
+	if(len(Picture_Layout_Custom_Name_In) > 0)
+	{
+		makestring(To_device, "xCommand Video PictureLayoutSet Target: Local LayoutFamily: %s\n", Picture_Layout_Custom_Name_In);
+	}
+}
+
+THREADSAFE Push Hang_Up_Call
+{
+	INTEGER eiTempHangUp;
+	
+	eiTempHangUp = getlastmodifiedarrayindex();
+	if(len(ConnectedCall[eiTempHangUp].Status) > 0)
+	{
+		makestring(To_Device, "xCommand Call Disconnect CallId: %d\n", ConnectedCall[eiTempHangUp].CallId);
+	}
+}
+
+Change Phone_Book_Type_In
+{
+	sPhoneBookType = Phone_Book_Type_In;
+}
+
+Push Get_Phone_Book
+{
+	if((iPhoneBookDownloadBusy = 0) && (len(sPhoneBookType) > 0))
+	{
+		fClearPhoneBookDisplay();trace("requesting phone book: going to Simpl#");
+		sx80PhoneBook.startDownloadPhoneBook(sPhoneBookType);
+	}
+}
+
+Push Top_Level
+{
+	if((iSearchActive = 0) && (iOnTopLevel <> 1))
+	{
+		Selected_Entry_Name_Text = "";
+		Selected_Entry_Number_Text = "";
+		iSelectedEntry = 0;
+		Selected_Item_Is_Contact = 0;
+		sx80PhoneBook.phoneBookTop();
+	}
+}
+
+Push Up_One_Level
+{
+	if((iSearchActive = 0) && (iOnTopLevel <> 1))
+	{
+		Selected_Entry_Name_Text = "";
+		Selected_Entry_Number_Text = "";
+		iSelectedEntry = 0;
+		Selected_Item_Is_Contact = 0;
+		sx80PhoneBook.phoneBookUpOneLevel();
+	}
+}
+
+Push Phone_Book_Dial
+{
+	STRING fsTempDial[250];
+	INTEGER fiA;
+
+	fsTempDial = "";
+	if((iSearchActive = 1) && (iSelectedEntry > 0) && (sSelectedEntryType = "Contact"))
+	{
+		fsTempDial = sx80PhoneBook.dialSearchEntry(iSelectedEntry - 1);
+	}
+	else if((iSelectedEntry > 0) && (sSelectedEntryType = "Contact"))
+	{
+		fsTempDial = sx80PhoneBook.dialPhoneBookEntry(iSelectedEntry - 1);
+	}
+	if(fsTempDial <> "")
+	{
+		To_Device = fsTempDial + "\n";
+	}
+}
+
+function searchTextChange()
+{
+	wait(50, _waitSearchText)
+	{
+		if(iSelectedEntry > 0)
+		{
+			sx80PhoneBook.clearSelected();
+			iSelectedEntry = 0;
+			Selected_Item_Is_Contact = 0;
+			Selected_Entry_Name_Text = "";
+			Selected_Entry_Number_Text = "";
+		}
+		if(len(sNewSearchText) > 0)
+		{
+			if(iSearchActive = 1)
+			{
+				sx80PhoneBook.clearSearch();
+			}
+			sSearchText = sNewSearchText;
+			sNewSearchText = "";
+			iSearchBusy = 1;
+			iSearchactive = 1;
+			Search_Is_Busy = iSearchBusy;
+			iSearchResultsCount = 0;
+			makestring(Phone_Book_Folder_Name_Text, "Search Results: %s", sSearchText);
+			sx80PhoneBook.startSearch(sSearchText);
+		}
+		else
+		{
+			if(iSearchActive = 1)
+			{
+				sx80PhoneBook.clearSearch();
+			}
+			sSearchText = "";
+			sNewSearchText = "";
+			iSearchBusy = 0;
+			iSearchactive = 0;
+			Search_Is_Busy = iSearchBusy;
+			iSearchResultsCount = 0;
+			Phone_Book_Folder_Name_Text = "";
+			fDisplayPhoneBook();
+		}
+	}
+}
+
+Change Phone_Book_Search_Text_In
+{
+	cancelwait(_waitSearchText);
+	sNewSearchText = Phone_Book_Search_Text_In;
+	if(len(sNewSearchText) > 0)
+	{
+		iSearchBusy = 1;
+		Search_Is_Busy = iSearchBusy;
+	}
+	else
+	{
+		iSearchBusy = 0;
+		iSearchactive = 0;
+		Search_Is_Busy = iSearchBusy;
+	}
+	searchTextChange();
+}
+
+Change Call_Rate
+{
+	sCallRate = Call_Rate;
+	Call_Rate = "";
+}
+
+Change Call_Type
+{
+	sCallType = Call_Type;
+	Call_Type = "";
+}
+
+Change Call_Protocol
+{
+	sCallProtocol = Call_Protocol;
+	Call_Protocol = "";
+}
+
+Change Dial_Number
+{
+	sDialNumber = Dial_Number;
+	Dial_Number = "";
+}
+/*******************************************************************************************
+  PhoneBook
+	RegisterDelegate(sx80PhoneBook, sendCommandEvent, fPhoneBookCommandFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, downloadCompleteEvent, fDownloadCompleteFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, downloadBusyEvent, fPhoneBookDownloadBusyFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, searchCompleteEvent, fPhoneBookSearchCompleteFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, searchBusyevent, fPhoneBookSearchBusyFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, currentLevelEvent, fPhoneBookCurrentLevelFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, searchCurrentLevelEvent, fPhoneBookSearchCurrentLevelFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, selectEntryEvent, fPhoneBookSelectEntryFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, searchSelectEntryEvent, fPhoneBookSearchSelectEntryFromSimplSharp);
+*******************************************************************************************/
+Callback Function fPhoneBookCommandFromSimplSharp(string paramCommandToSend)
+{
+	if(iPhoneBookDownloadBusy = 1)
+	{
+		cancelwait(_requestPhoneBookWait);
+		requestPhoneBookTimeOut();
+	}
+	To_Device = paramCommandToSend + "\n";
+}
+
+Callback Function fDownloadCompleteFromSimplSharp(long_integer paramDownloadComplete)
+{
+	if(paramDownloadComplete = 1)
+	{
+		cancelwait(_requestPhoneBookWait);
+		fDisplayPhoneBook();
+	}
+}
+
+Callback Function fPhoneBookDownloadBusyFromSimplSharp(long_integer paramDownloadBusy)
+{
+	string _temp[50];
+	makestring(_temp, "%ld", paramDownloadbusy);
+	iPhoneBookDownloadBusy = atoi(_temp);
+	Phone_Book_Download_Busy = iPhoneBookDownloadBusy;
+}
+
+Callback Function fPhoneBookSearchCompleteFromSimplSharp(long_integer paramSearchComplete)
+{
+	if(paramSearchComplete = 1)                       
+	{
+		fDisplaySearchResults();
+	}
+}
+
+Callback Function fPhoneBookSearchBusyFromSimplSharp(long_integer paramSearchBusy)
+{
+	string _temp[50];
+	makestring(_temp,"%ld", paramSearchBusy);
+	iSearchBusy = atoi(_temp);
+	Search_Is_Busy = iSearchBusy;
+}
+
+Callback Function fPhoneBookCurrentLevelFromSimplSharp(long_integer paramCurrentLevel)
+{
+	string _temp[50];
+	makestring(_temp,"%ld", paramCurrentLevel);
+	iOnTopLevel = atoi(_temp);
+	if(iOnTopLevel = 1)
+	{
+		Phone_Book_At_Top_Level = 1;
+	}
+	else
+	{
+		Phone_Book_At_Top_Level = 0;
+	}
+	fDisplayPhoneBook();
+}
+
+Callback Function fPhoneBookSearchCurrentLevelFromSimplSharp(long_integer paramCurrentLevel)
+{
+	fDisplaySearchResults();
+}
+
+CallBack Function fPhoneBookSelectEntryFromSimplSharp(long_integer paramSelectedEntry)
+{
+	integer tempCount;
+	string tempData[10];
+	makestring(tempData, "%ld", paramSelectedEntry);
+	if(sSelectedEntryType = "Directory")
+	{
+		tempCount = sx80PhoneBook.phoneBookCount(0);
+		if(tempCount = 0)//this must be a contact if the number of entries is zero
+		{
+			sSelectedEntryType = sx80PhoneBook.getSelectedEntryType();
+			iSelectedEntry = atoi(tempData) + 1;
+			Selected_Item_Is_Contact = 1;
+			Selected_Entry_Name_Text = sx80PhoneBook.getSelectedEntryName();
+			Selected_Entry_Number_Text = sx80PhoneBook.getPhoneBookEntryNumber();
+		}
+		else if((paramSelectedEntry + 1) <= tempCount)
+		{
+			sSelectedEntryType = sx80PhoneBook.getSelectedEntryType();
+			if(sSelectedEntryType = "Contact")
+			{
+				iSelectedEntry = atoi(tempData) + 1;
+				Selected_Item_Is_Contact = 1;
+				Selected_Entry_Name_Text = sx80PhoneBook.getSelectedEntryName();
+				Selected_Entry_Number_Text = sx80PhoneBook.getPhoneBookEntryNumber();
+			}
+			else
+			{
+				iSelectedEntry = 0;
+				Selected_Item_Is_Contact = 0;
+				Selected_Entry_Name_Text = "";
+				Selected_Entry_Number_Text = "";
+			}
+		}
+		else
+		{
+			sSelectedEntryType = sx80PhoneBook.getSelectedEntryType();
+			iSelectedEntry = 0;
+			Selected_Item_Is_Contact = 0;
+			Selected_Entry_Name_Text = "";
+			Selected_Entry_Number_Text = "";
+		}
+	}
+	else if(sSelectedEntryType = "Contact")
+	{
+		sSelectedEntryType = sx80PhoneBook.getSelectedEntryType();
+		if((paramSelectedEntry + 1) = iSelectedEntry)
+		{
+			iSelectedEntry = 0;
+			Selected_Item_Is_Contact = 0;
+			Selected_Entry_Name_Text = "";
+			Selected_Entry_Number_Text = "";
+		}
+		else if(sSelectedEntryType = "Contact")
+		{
+			iSelectedEntry = atoi(tempData) + 1;
+			Selected_Item_Is_Contact = 1;
+			Selected_Entry_Name_Text = sx80PhoneBook.getSelectedEntryName();
+			Selected_Entry_Number_Text = sx80PhoneBook.getPhoneBookEntryNumber();
+		}
+		else
+		{
+			iSelectedEntry = 0;
+			Selected_Item_Is_Contact = 0;
+			Selected_Entry_Name_Text = "";
+			Selected_Entry_Number_Text = "";
+		}
+	}
+	else //selected entry is root
+	{
+		tempCount = sx80PhoneBook.phoneBookCount(0);
+		if(tempCount = 0)
+		{
+			sSelectedEntryType = sx80PhoneBook.getSelectedEntryType();
+			iSelectedEntry = atoi(tempData) + 1;
+			Selected_Item_Is_Contact = 1;
+			Selected_Entry_Name_Text = sx80PhoneBook.getSelectedEntryName();
+			Selected_Entry_Number_Text = sx80PhoneBook.getPhoneBookEntryNumber();
+		}
+		else if((paramSelectedEntry + 1) <= tempCount)
+		{
+			sSelectedEntryType = sx80PhoneBook.getSelectedEntryType();
+			if(sSelectedEntryType = "Contact")
+			{
+				iSelectedEntry = atoi(tempData) + 1;
+				Selected_Item_Is_Contact = 1;
+				Selected_Entry_Name_Text = sx80PhoneBook.getSelectedEntryName();
+				Selected_Entry_Number_Text = sx80PhoneBook.getPhoneBookEntryNumber();
+			}
+			else
+			{
+				iSelectedEntry = 0;
+				Selected_Item_Is_Contact = 0;
+				Selected_Entry_Name_Text = "";
+				Selected_Entry_Number_Text = "";
+			}
+		}
+		else
+		{
+			sSelectedEntryType = sx80PhoneBook.getSelectedEntryType();
+			iSelectedEntry = 0;
+			Selected_Item_Is_Contact = 0;
+			Selected_Entry_Name_Text = "";
+			Selected_Entry_Number_Text = "";
+		}
+	}
+}
+
+CallBack Function fPhoneBookSearchSelectEntryFromSimplSharp(long_integer paramSelectedEntry)
+{
+	string tempData[10];
+
+	makestring(tempData, "%ld", paramSelectedEntry);
+	if(paramSelectedEntry < sx80PhoneBook.searchResultsCount())
+	{
+		iSelectedEntry = atoi(tempData) + 1;
+		sSelectedEntryType = sx80PhoneBook.getSearchEntryType(paramSelectedEntry);
+		if(sSelectedEntryType = "Contact")
+		{
+			Selected_Item_Is_Contact = 1;
+			Selected_Entry_Name_Text = sx80PhoneBook.getSelectedResultName();
+			Selected_Entry_Number_Text = sx80PhoneBook.getSearchEntryNumber();
+		}
+		else
+		{
+			Selected_Item_Is_Contact = 0;
+			Selected_Entry_Name_Text = "";
+			Selected_Entry_Number_Text = "";
+		}
+	}
+	else
+	{
+		iSelectedEntry = 0;
+		Selected_Item_Is_Contact = 0;
+		Selected_Entry_Name_Text = "";
+		Selected_Entry_Number_Text = "";
+	}
+}
+/*******************************************************************************************
+  New Corporate Phone Book Search
+*******************************************************************************************/
+Callback Function fCommandFromSimplSharp(string paramCommandToSend)
+{
+	To_Device = paramCommandToSend;
+}
+
+Callback Function fCurrentLevelChangeSimplSharp(signed_long_integer paramCurrentLevel)
+{
+	newCorpSearchCurrentLevel = paramCurrentLevel;
+	if(newCorpSearchCurrentLevel = 0)
+	{
+		New_Corporate_Search_Not_On_Top_Level = 0;
+	}
+	else
+	{
+		New_Corporate_Search_Not_On_Top_Level = 1;
+	}
+}
+
+Callback Function fNumberOfResultsSimplSharp(long_Integer paramResultsCount)
+{
+	resultsCount = atoi(ltoa(paramResultsCount));
+	if(resultsCount = 0)
+	{
+		New_Corporate_Search_Total_Results_Count = 1;
+	}
+	else
+	{
+		New_Corporate_Search_Total_Results_Count = resultsCount;
+	}
+}
+
+Callback Function fSearchCompleteSimplSharp(long_integer paramState)
+{
+	integer i;
+
+	if(paramState = 0)
+	{
+
+		CorpSearchInProgress = on;
+		New_Corporate_Search_Busy = CorpSearchInProgress;
+		if(resultsCount <> 0)
+		{
+			for(i = 1 to resultsCount)
+			{
+				New_Corporate_Search_Results_Name_Text[i] = "";
+			}
+		}
+	}
+	else
+	{
+		CorpSearchInProgress = off;
+		New_Corporate_Search_Busy = CorpSearchInProgress;trace("callback fSearchComplete: resultsCount = %d:", resultsCount);
+		if(resultsCount = 0)
+		{
+			New_Corporate_Search_Results_Name_Text[1] = sx80CorpSearch.phoneBookList(0);
+		}
+		else
+		{
+			for(i = 1 to resultsCount)
+			{
+				New_Corporate_Search_Results_Name_Text[i] = sx80CorpSearch.phoneBookList(i - 1);
+			}
+		}
+	}
+}
+
+Callback Function fSearchPathBarSimplSharp(string paramPathText)
+{
+	pathText = paramPathText;
+	New_Corporate_Search_Path_Text = pathText;
+}
+
+Callback Function fSelectedItemSimplSharp(signed_long_Integer paramSelectedItem)
+{
+	New_Corporate_Search_Deselect_Item_out = newSearchSelectedItem;
+	if(paramSelectedItem = ciNEWSEARCHMAX + 5)
+	{
+		newSearchSelectedItem = 0;
+	}
+	else
+	{
+		newSearchSelectedItem = atoi(ltoa(paramSelectedItem)) + 1;
+		New_Corporate_Search_Selected_Item_Out = newSearchSelectedItem;
+	}
+}
+
+Callback Function fSearchStringSimplSharp(string paramSearchString)
+{
+	newSearchSearchText = paramSearchString;
+	New_Corporate_Search_Text = newSearchSearchText;
+}
+
+Callback Function fDialErrorSimplSharp(string paramDialErrorMessage)
+{
+	newSearchDialErrorMessage = paramDialErrorMessage;
+	if(newSearchDialErrorMessage = "")
+	{
+		New_Corporate_Search_Dial_Error_Message = newSearchDialErrorMessage;
+		New_Corporate_Search_Dial_Error = 0;
+	}
+	else
+	{
+		New_Corporate_Search_Dial_Error_Message = newSearchDialErrorMessage;
+		New_Corporate_Search_Dial_Error = 1;
+	}
+}
+
+Callback Function fSearchItemTypeSimplSharp(string paramSearchItemType)
+{
+	newSearchContactType = paramSearchItemType;
+	if(newSearchContactType = "Contact")
+	{
+		New_Search_Selected_Item_Is_Contact = 1;
+	}
+	else
+	{
+		New_Search_Selected_Item_Is_Contact = 0;
+	}
+}
+
+Callback Function fSelectedItemNameSimplSharp(string paramSelectedItemName)
+{
+	New_Corporate_Search_Selected_Item_Name_Text = paramSelectedItemName;
+}
+
+Callback Function fSelectedItemNumberSimplSharp(string paramSelectedItemNumber)
+{
+	New_Corporate_Search_Selected_Item_Number_Text = paramSelectedItemNumber;
+}
+
+Callback Function fTotalResultsSimplSharp(long_integer paramTotalResults)
+{
+	New_Corporate_Search_Total_Results = atoi(ltoa(paramTotalResults));
+}
+
+Callback Function fResultsDisplayRangeSimplSharp(string paramResultsDisplayRange)
+{
+	New_Corporate_Search_Results_Display_Range_Text = paramResultsDisplayRange;
+}
+
+Push SIP_Enabled
+{
+	sx80CorpSearch.setSipEnabled(1);
+	sx80PhoneBook.setSipEnabled(1);
+}
+
+Release SIP_Enabled
+{
+	sx80CorpSearch.setSipEnabled(0);
+	sx80PhoneBook.setSipEnabled(0);
+}
+
+Push H323_Enabled
+{
+	sx80CorpSearch.setH323Enabled(1);
+	sx80PhoneBook.setH323Enabled(1);
+}
+
+Release H323_Enabled
+{
+	sx80CorpSearch.setH323Enabled(0);
+	sx80PhoneBook.setH323Enabled(0);
+}
+
+Push New_Corporate_Search_Up_One_Level
+{
+	integer i;
+
+	if(newCorpSearchCurrentLevel >= 0)
+	{
+		if(resultsCount <> 0)
+		{
+			for(i = 1 to resultsCount)
+			{
+				New_Corporate_Search_Results_Name_Text[i] = "";
+			}
+		}
+		sx80CorpSearch.upOneLevel();
+	}
+}
+
+Push New_Corporate_Search_Top
+{
+	integer i;
+
+	if(newCorpSearchCurrentLevel > 0)
+	{
+		if(resultsCount <> 0)
+		{
+			for(i = 1 to resultsCount)
+			{
+				New_Corporate_Search_Results_Name_Text[i] = "";
+			}
+		}
+		sx80CorpSearch.topLevel();
+	}
+}
+
+Push New_Corporate_Search_Clear_Search
+{
+	integer i;
+
+	if(resultsCount <> 0)
+	{
+		for(i = 1 to resultsCount)
+		{
+			New_Corporate_Search_Results_Name_Text[i] = "";
+		}
+		sx80CorpSearch.clearSearch();
+	}
+	New_Corporate_Search_Results_Display_Range_Text = "";
+}
+
+Push New_Corporate_Search_Dial
+{
+	if(newSearchContactType = "Contact")
+	{
+		sx80COrpSearch.dial(newSearchSelectedItem - 1);
+	}
+}
+
+Push New_Corporate_Search_Cancel_Selected_Item
+{
+	if(newSearchSelectedItem != (ciNEWSEARCHMAX + 5))
+	{
+		sx80CorpSearch.selectItem(ciNEWSEARCHMAX + 5);
+	}
+}
+
+Change New_Corporate_Search_Selected_Item_In
+{
+	if((resultsCount > 0) && (New_Corporate_Search_Selected_Item_In > 0))
+	{
+		sx80CorpSearch.selectItem(New_Corporate_Search_Selected_Item_In - 1);
+	}
+}
+
+Change New_Corporate_Search_Text_In
+{
+	integer i;
+
+	if(resultsCount > 0)
+	{
+		for(i = 1 to resultsCount)
+		{
+			New_Corporate_Search_Results_Name_Text[i] = "";
+		}
+	}
+	sNewSearchSearchString = New_Corporate_Search_Text_In;
+}
+
+Release New_Corporate_Search_Start
+{
+	if(len(sNewSearchSearchString) > 0)
+	{
+//		sx80CorpSearch.setPhoneBookLocation("Local");
+		sx80CorpSearch.searchChars(New_Corporate_Search_Text_In);
+	}
+	else
+	{
+		sx80CorpSearch.clearSearch();
+	}
+}
+ 
+THREADSAFE CHANGE From_Console
+{
+	STRING esTempReceive[2500], esSend[25];
+	
+	while(1)
+	{
+		try
+		{
+			esTempReceive = gather(csCRLF, From_Console);
+			esSend = sfProcessConsole(esTempReceive);
+			if(len(esSend) > 0)
+			{
+				To_Console = esSend;
+			}
+		}
+		catch
+		{
+			generateusererror("From_Console Error: %s", getexceptionmessage());
+		}
+	}
+}
+
+threadsafe change From_Device
+{
+	string esTempProcess[2500], esSend[250];
+	
+	while(1)
+	{
+		try
+		{
+			sTempReceive = gather(csCRLF, From_Device);
+			esTempProcess = sTempReceive;
+			esSend = sfProcessFromDevice(esTempProcess);
+			if(len(esSend) > 0)
+			{
+				To_Device = esSend;
+			}
+			sTempReceive = "";
+			esTempProcess = "";
+		}
+		catch
+		{
+			generateusererror("From_Device Error: %s", getexceptionmessage());
+		}
+	}
+}
+/*******************************************************************************************
+  Main()
+  Uncomment and place one-time startup code here
+  (This code will get called when the system starts up)
+*******************************************************************************************/
+Function Main()
+{
+	WaitForInitializationComplete();
+	RegisterDelegate(sx80CorpSearch, sendCommandEvent, fCommandFromSimplSharp);
+	RegisterDelegate(sx80CorpSearch, currentLevelEvent, fCurrentLevelChangeSimplSharp);
+	RegisterDelegate(sx80CorpSearch, numberOfResultsEvent, fNumberOfResultsSimplSharp);
+	RegisterDelegate(sx80CorpSearch, searchCompleteEvent, fSearchCompleteSimplSharp);
+	RegisterDelegate(sx80CorpSearch, searchPathBarEvent, fSearchPathBarSimplSharp);
+	RegisterDelegate(sx80CorpSearch, selectedItemEvent, fSelectedItemSimplSharp);
+	RegisterDelegate(sx80CorpSearch, searchStringEvent, fSearchStringSimplSharp);
+	RegisterDelegate(sx80CorpSearch, dialErrorEvent, fDialErrorSimplSharp);
+	RegisterDelegate(sx80CorpSearch, searchItemTypeEvent, fSearchItemTypeSimplSharp);
+	RegisterDelegate(sx80CorpSearch, selectedItemNameEvent, fSelectedItemNameSimplSharp);
+	RegisterDelegate(sx80CorpSearch, selectedItemNumberEvent, fSelectedItemNumberSimplSharp);
+	RegisterDelegate(sx80CorpSearch, totalResultsEvent, fTotalResultsSimplSharp);
+	RegisterDelegate(sx80CorpSearch, resultsDisplayRangeEvent, fResultsDisplayRangeSimplSharp);
+	
+	RegisterDelegate(sx80PhoneBook, sendCommandEvent, fPhoneBookCommandFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, downloadCompleteEvent, fDownloadCompleteFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, downloadBusyEvent, fPhoneBookDownloadBusyFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, searchCompleteEvent, fPhoneBookSearchCompleteFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, searchBusyEvent, fPhoneBookSearchBusyFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, currentLevelEvent, fPhoneBookCurrentLevelFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, searchCurrentLevelEvent, fPhoneBookSearchCurrentLevelFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, selectEntryEvent, fPhoneBookSelectEntryFromSimplSharp);
+	RegisterDelegate(sx80PhoneBook, searchSelectEntryEvent, fPhoneBookSearchSelectEntryFromSimplSharp);
+	
+	New_Corporate_Search_Not_On_Top_Level = 0;
+	requestTimeOutCounter = 0;
+	resultsCount = 0;
+	NewCorpSearchCurrentLevel = 0;
+	iTouchExperimental = 0;
+	iTouchRegistered = 1;
+	sMACAddress = "Crestron Cisco SX80";
+	sProcessorType = "Crestron Processor";
+	sFirmwareVersion = "Crestron Cisco SX80 v1.2";
+	lastCommandProcessed = "";
+	iPhoneBookDownloadBusy = 0;
+	iProcessingSearchResults = 0;
+	iFlag = 0;
+	iFlag1 = 0;
+	iNoEntries = 0;
+	iNewSearchText = 0;
+	iSearchBusy = 0;
+	sNewSearchText = "";
+	iOnTopLevel = 1;
+	Phone_Book_At_Top_Level = iOnTopLevel;
+	phoneBookDisplayCount = 0;
+}

@@ -1,0 +1,108 @@
+[
+Version=1
+]
+[
+ObjTp=FSgntr
+Sgntr=UserMacro
+RelVrs=4.06.01
+IntStrVrs=2
+MinSMWVrs=2.05.04
+
+MinTIOVrs=0
+SavedBy=SMW4.03.15
+]
+[
+ObjTp=Hd
+S0Nd=1
+S1Nd=2
+SLNd=3
+PrNm=Press and Hold.umc
+CmVr=3.03
+DbVr=61.06.001.00
+DvcDbVr=82.05.002.00
+OpVr=MC3 1.011.0023
+PgmNm=MAD
+DlrNm=AVSOURCE
+CltNm=Press and Hold
+JpNo=1
+Incl=362,378,380,405,407,408,409,478,522,537,554,586,590,611,624,767,830,883,1032,1062,1079,1134,1157,1199,1220,1222,1299,1348,1439,1472,1473,1499,1746,1803,1975,2229,2354,2514,2523,2532,3708,3902,3912,3918,3925,1766,2574,2651,2817,2886,2938,2947,3181,3197,3233,3710,3735,3736,3816,3888,4176,4308,4476,4591,4769,5360,5388,5420,5455,
+SmVr=1026
+DvVr=1026
+TpN1=1
+TpN2=2
+TpN3=3
+TpN4=4
+TpN5=5
+APg=1
+FltTmp=1
+FpCS=0
+EnType=0
+ZeroOnIoOk=0
+SGMethod=1
+Cmn1=the outputs of this module only pulse
+]
+[
+ObjTp=Bk
+Nm1=\
+Sx1=0
+Sy1=0
+Mx1=0
+]
+[
+ObjTp=Bw
+H=1
+Lx=0
+Ly=0
+Rx=1395
+Ry=923
+Xm=-1
+Ym=-1
+SH=10
+Z=100
+Ht=3
+Hi=1
+]
+[
+ObjTp=Symbol
+Name=Press and Hold
+Code=1
+SmplCName=Press and Hold.umc
+Smpl-C=3
+CompilerTimePrecision=Single_Or_Double_Precision
+Exclusions=1,19,20,21,88,89,167,168,179,216,225,248,249,266,302,305,
+Hint=Press and Hold
+SMWRev=2.07.04
+TIORev=0
+HelpID=1055
+APg=1
+StdCmd=0
+FltTmp=1
+FpCS=0
+NumFixedInputs=1
+NumFixedOutputs=2
+NumFixedParams=2
+MinVariableInputs=0
+MinVariableInputsList2=0
+MinVariableInputsList3=0
+MinVariableOutputs=0
+MinVariableOutputsList2=0
+MinVariableOutputsList3=0
+MinVariableParams=0
+SymbolTree=46
+UserSymTreeName=AVSOURCE
+ParamSigType1=Time|Constant
+ParamSigType2=Time|Constant
+InputCue1=Button_press
+OutputCue1=Not_held
+OutputCue2=Held
+ParamCue1=Hold time
+ParamCue2=Pulse time
+MPp=2
+Pp1=1
+Pp2=2
+FileName=Press and Hold.umc
+EncodingType=0
+ZeroOnIoOk=0
+]
+FeSchVr=001
+¶¬ÊäæÒÞÜzbº¶žÄÔ¨àzŒ¦ÎÜèä¦ÎÜèäzªæÊäšÂÆäÞ¤ÊØ¬äæzh\`l\`b’Üè¦èä¬äæzdšÒÜ¦š®¬äæzd\`n\`hšÒÜ¨’ž¬äæz`¦ÂìÊÈ„òz¦š®h\`f\bjº¶žÄÔ¨àzÈ¦`œÈzb¦bœÈzd¦˜œÈzf äœÚz äÊ<d:æ>@ÂÜÈ@ÞØÈ\êÚÆ†Ú¬äzf\`fˆÄ¬äzlb\`l\<d:`>b\<d:`>ˆìÆˆÄ¬äzpd\`j\<d:`>d\<d:`>žà¬äzš†f@b\`<d:b>\<d:`>df ÎÚœÚzš‚ˆˆØäœÚz‚¬¦žª¤†Š†ØèœÚz äÊ<d:æ>@ÂÜÈ@ÞØÈ”àœÞzb’ÜÆØzfldXfnpXfp`Xh`jXh`nXh`pXh`rXhnpXj<d:d>XjfnX<d:j>hXjplXjr`Xl<d:b>XldhXnlnXpf`X<d:p>fXb`fdXb`ldXb`nrX<d:b>fhX<d:b>jnX<d:b><d:r>Xb<d:d>`Xb<f:d>Xbd<d:r>XbfhpXbhfrXbhndXbhnfXbh<d:r>XbnhlXbp`fXbrnjX<f:d>rXdfjhXdjbhXdjdfXdjfdXfn`pXfr`dXfrbdXfrbpXfrdjXbn<d:l>XdjnhXdljbXdpbnXd<d:p>lXdrfpXdrhnXfbpbXfbrnXfd<d:f>Xfnb`XfnfjXfnflXfpblXf<f:p>XhbnlXhf`pX<d:h>nlXhjrbXhnlrXjfl`Xjf<d:p>Xjhd`Xjh<d:j>X¦Ú¬äzb`dlˆì¬äzb`dl¨àœbzb¨àœdzd¨àœfzf¨àœhzh¨àœjzj‚ ÎzbŒØè¨ÚàzbŒà†¦z`ŠÜ¨òàÊz`´ÊäÞžÜ’ÞžÖz`¦ŽšÊèÐÞÈzb†ÚÜbzèÐÊ@Þêèàêèæ@ÞÌ@èÐÒæ@ÚÞÈêØÊ@ÞÜØò@àêØæÊº¶žÄÔ¨àz„ÖœÚbz¸¦ðbz`¦òbz`šðbz`º¶žÄÔ¨àz„îzb˜ðz`˜òz`¤ðzbfrj¤òzrdf°ÚzZb²T  TrhrhTŠ  TÚzZb¦zb`´zb<d:`>èzfÒzbº¶žÄÔ¨àz¦òÚÄÞØœÂÚÊz äÊ<d:æ>@ÂÜÈ@ÞØÈ†ÞÈÊzb¦ÚàØ†œÂÚÊz äÊ<d:æ>@ÂÜÈ@ÞØÈ\êÚÆ¦ÚàØZ†zf†ÞÚàÒØÊä¨ÒÚÊ äÊÆÒæÒÞÜz¦ÒÜÎØÊ¾žä¾ˆÞêÄØÊ¾ äÊÆÒæÒÞÜŠðÆØêæÒÞÜæzbXbrXd`XdbX<d:p>XprXblnXblpXbnrXdblX<d:d>jXdhpXdhrXd<d:l>Xf`dXf`jXÒÜèz äÊ<d:æ>@ÂÜÈ@ÞØÈ¦š®¤Êìzd\`n\`h¨’ž¤Êìz`ÊØà’ˆzb`<d:j>‚ Îzb¦èÈ†ÚÈz`ŒØè¨ÚàzbŒà†¦z`œêÚŒÒðÊÈ’ÜàêèæzbœêÚŒÒðÊÈžêèàêèæzdœêÚŒÒðÊÈ ÂäÂÚæzdšÒÜ¬ÂäÒÂÄØÊ’Üàêèæz`šÒÜ¬ÂäÒÂÄØÊ’Üàêèæ˜Òæèdz`šÒÜ¬ÂäÒÂÄØÊ’Üàêèæ˜Òæèfz`šÒÜ¬ÂäÒÂÄØÊžêèàêèæz`šÒÜ¬ÂäÒÂÄØÊžêèàêèæ˜Òæèdz`šÒÜ¬ÂäÒÂÄØÊžêèàêèæ˜Òæèfz`šÒÜ¬ÂäÒÂÄØÊ ÂäÂÚæz`¦òÚÄÞØ¨ä<d:Ê>zhlªæÊä¦òÚ¨ä<d:Ê>œÂÚÊz‚¬¦žª¤†Š ÂäÂÚ¦ÒÎ¨òàÊbz¨ÒÚÊø†ÞÜæèÂÜè ÂäÂÚ¦ÒÎ¨òàÊdz¨ÒÚÊø†ÞÜæèÂÜè’Üàêè†êÊbz„ê<d:è>ÞÜ¾àäÊ<d:æ>žêèàêè†êÊbzœÞè¾ÐÊØÈžêèàêè†êÊdzÊØÈ ÂäÂÚ†êÊbzÞØÈ@èÒÚÊ ÂäÂÚ†êÊdz êØæÊ@èÒÚÊš àzd àbzb àdzdŒÒØÊœÂÚÊz äÊ<d:æ>@ÂÜÈ@ÞØÈ\êÚÆŠÜÆÞÈÒÜÎ¨òàÊz`´ÊäÞžÜ’ÞžÖz`º¶žÄÔ¨àz¦Úzb¦Ú†zbjnœÚz†ÊÜèäÂØ@†ÞÜèäÞØ@šÞÈêØÊæžÄÔ¬Êäzb†ŒzdÜb’zbÜbžzbÚ’zbÚžzbèžzbÚ zb bzº¶žÄÔ¨àz¦Úzd¦Ú†zbjnœÚzœÊèîÞäÖ@šÞÈêØÊæžÄÔ¬Êäzb†ŒzdÜb’zbÜbžzbÚ’zbÚžzbèžzbÚ zb bzº¶žÄÔ¨àz¦Úzf¦Ú†zbjnœÚzŠèÐÊäÜÊèžÄÔ¬Êäzb†ŒzdÜb’zbÜbžzbÚ’zbÚžzbèžzbÚ zb bzº¶žÄÔ¨àz¦Úzh¦Ú†zbjlœÚz˜ÞÎÒÆžÄÔ¬Êäzb†ŒzdÚ†zn†bzn†dzp†fz<d:b>†hzr†jzbd†lzbf†nzb`º¶žÄÔ¨àz¦Úzj¦Ú†zbjnœÚzˆÊÌÒÜÊ‚äÎêÚÊÜèæžÄÔ¬Êäzb†ŒzdÜb’zbÜbžzbÚ†zb†bzlÚ’zbÚžzbèžzbÚ zb bzº¶žÄÔ¨àz¦Úzl¦Ú†z<d:j>œÚz‚äÎêÚÊÜè@ˆÊÌÒÜÒèÒÞÜžÄÔ¬Êäzb äzj†ŒzdÜb’zbÜbžzdÚ’zb’bzhÚžzdèžzdžbzjždzlÚ zd bzÞØÈ@èÒÚÊ dz êØæÊ@èÒÚÊš àzd àbzb àdzdº¶žÄÔ¨àz¦Úzn¦Ú†z<f:n>œÚz¦èÊ<d:à>Êä@îÒèÐ@ äÞÎäÊ<d:æ>@L@¤ÊæÊèžÄÔ¬Êäzb äzh†ŒzdÜb’zdÜbžzjÚ’zd’bzh’dzjÚžzjèžzjžbzrždzpžfzpžhzpžjzlÚ zd bzFÞØÈ@èÒÚÊ dzF êØæÊ@èÒÚÊº¶žÄÔ¨àz¦Úzp¦Ú†znœÚzœÊÎÂèÒìÊ@¨äÂÜæÒèÒÞÜ@ŽÂèÊžÄÔ¬Êäzb äzh†ŒzdÜb’zbÜbžzb†ÚÜbzÜÞè@ÐÊØÈ<d:¸>Ú’zb’bzhÚžzbèžzbžbznº¶žÄÔ¨àz¦Úzr¦Ú†zbœÚz‚œˆžÄÔ¬Êäzb äzh†ŒzdÜb’zdÜbžzb†ÚÜbzÆÂÜÆÊØ<d:¸>Ú’zd’bzr’dznÚžzbèžzbžbzb`º¶žÄÔ¨àz¦Úzb`¦Ú†zbdbœÚz†Þ<d:Ú>ÊÜèžÄÔ¬Êäzb äzh†Œzd†ÚÜbz‚¬¦žª¤†Š@<d:˜>†@†ÞàòäÒÎÐè@d`bj<d:¸>¨ÐÊ@ÚÂèÊäÒÂØ@ÒÜ@îÐÒÆÐ@èÐÒæ@ÜÞèÒÆÊ@Â<d:à>ÊÂäæ<d:ø>b†ÚÜdzÒæ@èÐÊ@àäÞàÊäèò@ÞÌ@‚¬¦žª¤†Š@<d:˜>†X@îÐÒÆÐ@ÆØÂÒÚæ@ÆÞàòäÒÎÐè@êÜÈÊä@èÐÊ<d:ø>b†ÚÜfzØÂîæ@ÞÌ@èÐÊ@ªÜÒèÊÈ@¦èÂèÊæ@ÞÌ@‚ÚÊäÒÆÂ@ÒÜ@èÐÊ@ÊÜèÒäÊ@ÄÞÈò@ÞÌ@ÚÂèÊäÒÂØ<d:ø>b†ÚÜhzÂÜÈ@ÒÜ@Â<d:Ø>@àÂäèæ@èÐÊäÊÞÌX@äÊÎÂäÈØÊ<d:æ>@ÞÌ@èÐÊ@êæÊ@èÞ@îÐÒÆÐ@Òè@Òæ@ÄÊÒÜÎ<d:ø>b†ÚÜjzàêè\<d:@>‚Üò@êæÊX@ÒÜ@îÐÞØÊ@Þä@ÒÜ@àÂäèX@ÞÌ@èÐÒæ@ÚÂèÊäÒÂØ@Äò@ÂÜÞèÐÊä<d:ø>b†ÚÜlzàÂäèò@îÒèÐÞêè@èÐÊ@ÊðàäÊ<d:æ>@îäÒ<d:è>ÊÜ@àÊäÚÒ<d:æ>ÒÞÜ@ÞÌ@‚¬¦žª¤†Š@<d:˜>†@Òæ<d:ø>b†ÚÜnzàäÞÐÒÄÒèÊÈ\@‚¬¦žª¤†Š@<d:˜>†\@äÊæÊäìÊæ@Â<d:Ø>@äÒÎÐèæ@êÜÈÊä@Â<d:à>ØÒÆÂÄØÊ@ØÂîæ\Ú zb bz‚¬¦žª¤†Š@<d:˜>†@†ÞàòäÒÎÐè@d`bjº¶žÄÔ¨àz¦Úz<d:b>¦Ú†zdbœÚzšêØèÒàØÊ@žÜÊ@¦ÐÞèæžÄÔ¬Êäzb äzh†ŒzdÜb’zdÜbžzbÚ’zd’dzbfÚžzbèžzbžbzjÚ zb bzF êØæÊ@èÒÚÊº¶žÄÔ¨àz¦Úzbd¦Ú†zd`œÚz„ê<d:Ì>ÊäžÄÔ¬Êäzb äzh†ŒzdÜb’zfÜbžzd†ÚÜbzÜÞè@ÐÊØÈ<d:¸>Ú’zf’bz<d:b>’dzn’fzb`Úžzdèžzdžbzbfždzbfº¶žÄÔ¨àz¦Úzbf¦Ú†zbrœÚz’ÜèÊäØÞÆÖžÄÔ¬Êäzb äzh†ŒzdÜb’zfÜbžzbÚ’zf’bzl’fzhÚžzbèžzbžbz<d:b>º¶žÄÔ¨àz¦ÎzhœÚz„ê<d:è>ÞÜ¾àäÊ<d:æ>º¶žÄÔ¨àz¦ÎzjœÚzœÞè¾ÐÊØÈº¶žÄÔ¨àz¦ÎzlœÚzÊØÈº¶žÄÔ¨àz¦ÎznœÚzÄê<d:è>ÞÜ¾àäÊ<d:æ>¾ÜèäÂÜæº¶žÄÔ¨àz¦ÎzpœÚz<d:^><d:¾>ÂÜÂØÞÎ¾äÊæÊäìÊÈ<d:¾>¦Î¨àzdº¶žÄÔ¨àz¦ÎzrœÚzæèÊ<d:à>Êä¾äê<d:Ü>ÒÜÎº¶žÄÔ¨àz¦Îzb`œÚzÆÂÜÆÊØ¾ÐÞØÈº¶žÄÔ¨àz¦Îz<d:b>œÚzÂ<d:Ø>Þî¾ÜÞè¾ÐÊØÈº¶žÄÔ¨àz¦ÎzbfœÚzÜÞè¾ÐÊØÈ¾ÄêÌº¶žÄÔ¨àzˆàzb¨àzb¦ˆzŠÜèÊä@ÞØÈ@¨’ÚÊœŒzhpˆœŒzblŠÜÆŒÚèz`ˆ¬˜Œzb¦ÎÜz`º¶žÄÔ¨àzˆàzd¨àzb¦ˆzŠÜèÊä@ êØæÊ@¨ÒÚÊœŒzj`ˆœŒzblŠÜÆŒÚèz`ˆ¬˜Œzb¦ÎÜz`º

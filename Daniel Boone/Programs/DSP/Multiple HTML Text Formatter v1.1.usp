@@ -1,0 +1,71 @@
+// SIMPL+ Module Information
+/*
+Dealer Name:		TSI Technology Solutions
+System Name:		HTML Text 
+Programmer:			Jpride
+Comments:			v1.2 - Expanded Max_Items
+*/
+
+// Compiler Directives
+#ENABLE_DYNAMIC
+#SYMBOL_NAME "Multiple HTML Text Formater v1.2"
+#CATEGORY "46" "#2015-ReOrg-GUI"
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+#ENCODING_ASCII
+#DEFINE_CONSTANT MAX_ITEMS       124         
+
+// DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+STRING_INPUT 	_SKIP_, _SKIP_, _SKIP_, Text$[MAX_ITEMS][1000];
+STRING_OUTPUT 	_SKIP_, _SKIP_, _SKIP_, FormatText$[MAX_ITEMS];
+
+// Parameters
+INTEGER_PARAMETER	FontSize;
+STRING_PARAMETER	Color[7];
+STRING_PARAMETER	Align[16];
+
+
+// Parameter Properties
+#BEGIN_PARAMETER_PROPERTIES FontSize
+  propValidUnits = unitDecimal;
+  propBounds = 0d , 500d;
+  propDefaultValue = 16d;
+#END_PARAMETER_PROPERTIES
+
+#BEGIN_PARAMETER_PROPERTIES Color
+	propValidUnits = unitString;
+  propDefaultValue = "#FFFFFF";
+#END_PARAMETER_PROPERTIES
+
+#BEGIN_PARAMETER_PROPERTIES Align
+	propValidUnits = unitString;
+ 	propList = { "left" , "Left" } , { "center" , "Center" } , { "right" , "Right" };
+#END_PARAMETER_PROPERTIES
+           
+
+           
+INTEGER i;
+
+
+// Function
+
+Function Generate()
+{
+		MAKESTRING(FormatText$[i], "<FONT size=\x22%d\x22 color=\x22%s\x22 align=\x22%s\x22>%s</FONT>",FontSize, Color, Align, Text$[i]);
+		ProcessLogic();
+}
+
+// Event Handlers
+
+threadsafe CHANGE Text$
+{
+	i = GetLastModifiedArrayIndex();
+	Generate();
+}	
+
+Function Main()
+{
+	i=0;
+}
+

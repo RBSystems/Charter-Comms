@@ -1,0 +1,10 @@
+<Device Model="CP3N">
+   <Network Type="Cresnet" Id="01">
+      <Device Model="GLS-ODT-C-CN" DeviceId="97" Name="[os] occupancy sensor"/>
+   </Network>
+   <Network Type="Ethernet" Id="02">
+      <Device Model="TSW-1060-NC" DeviceId="03" Name="Main TP"/>
+      <Device Model="Core3 UI XPanel" DeviceId="04" Name="Room TP"/>
+      <Device Model="Core3 UI XPanel" DeviceId="05" Name="Maintenence TP"/>
+   </Network>
+</Device>

@@ -1,0 +1,125 @@
+/*
+Dealer Name:Crestron
+System Name:
+System Number:
+Programmer:JMG
+Comments:
+*/
+
+//Compiler Directives
+// #ENABLE_DYNAMIC
+// #SYMBOL_NAME ""
+// #HINT ""
+// #DEFINE_CONSTANT
+#CATEGORY "0" 
+// #HELP_PDF_FILE ""
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+
+//Include Libraries
+
+#User_SimplSharp_Library "QsysControlV3"
+
+//IO Variables
+DIgital_Input Initialize, Poll_Enable,Trigger;
+Analog_Input Value_In,Value_In_Ramped,Relative_In, Relative_In_Ramped,Raw_In,Ramp_Time;
+String_Input String_In[200];
+Analog_Output Value_Out;
+Analog_Output Relative_Out;
+Analog_Output Raw_Out;  		//For Router, Buttons, etc... Direct Unformatted Values.
+String_Output String_Out;
+
+//Parameters
+Integer_Parameter Core_ID;
+String_Parameter Named_Control[100];
+//Global Variables
+Integer giID;
+String gsNC[100];
+Integer giRamp;
+
+QsysNamedControl NC;
+ 
+//Events
+EventHandler HandleReceivedData(QsysNameControlEvent sender,QsysNCDataChangeArgs args)
+{
+ Value_Out = args.iValue;
+ Relative_Out = args.rValue;
+ String_Out = args.sValue;
+ Raw_Out = args.RawValue; 
+}
+Change Ramp_Time
+{
+ 	giRamp = Ramp_Time / 100;
+	NC.RampTime = giRamp;
+}
+
+Push Poll_Enable
+{
+ 	NC.Poll = 1;
+}
+Release Poll_Enable
+{		
+	NC.Poll = 0;
+}
+Change Value_In
+{
+   	NC.dValue = Value_In;
+}
+Change Value_In_Ramped
+{
+	If(giRamp > 0)
+	NC.dValueRamp = Value_In_Ramped;
+	else
+	NC.dValue = Value_In_Ramped;		
+}
+Change Relative_In
+{
+ 	NC.rValue = Relative_In;
+}
+Change Relative_In_Ramped
+{
+	If(giRamp > 0)
+	NC.rValueRamp = Relative_In_Ramped;
+	else
+	NC.rValue = Relative_In_Ramped;
+}
+Change Raw_In
+{
+ 	NC.Value = Raw_In;
+
+
+}
+Change String_In
+{
+	 	NC.sValue = String_In;
+}
+push Trigger
+{
+    NC.NamedControlTrigger();
+}	
+
+Push Initialize
+{
+	NC.ListType = 0;
+ 	NC.ID = giID;
+	NC.NameC = gsNC;	//Add Named Control to Core's Named Control Dictionary.		
+	RegisterEvent(NC, OnDataReceived, HandleReceivedData);
+}
+Function Main()
+{
+    // TODO:  Add code here
+    // Initialize declared global and local variables/arrays as needed.
+
+     WaitForInitializationComplete();
+	giID = Core_ID;
+	gsNC = Named_Control;
+	giRamp = Ramp_Time / 100;
+        
+	    // If you are reading any Input or Output variables, uncomment
+    //   the WaitForInitializationComplete statement above and read
+    //   them afterwards.  Input/Output variables will not have
+    //   their correct values set until after the logic processor
+    //   runs and propagates the values to them.
+}
+

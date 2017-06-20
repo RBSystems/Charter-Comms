@@ -1,0 +1,65 @@
+[BEGIN]
+  ObjTp=FSgntr
+  Sgntr=ArchiveManifest
+  RelVrs=4.07.03
+  IsProgram=1
+  TopLevelProgram=CiscoCodec-s5 v1.0.0.smw
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=CiscoCodec-s5 v1.0.0.smw
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=CiscoCodec-s5 v1.0.0.sig
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=CiscoCodec-s5 v1.0.0.lpz
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=CiscoCodec-s5 v1.0.0.smft
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=CiscoCodec-s5 v1.0.0.lpz.hash
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Cisco SX80 v1.5.6.umc
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Cisco SX80 Drive v1.5.6.ush
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Cisco SX80 Corporate Phone Book.clz
+  Scope=1
+  Module=Cisco SX-80 Drive v1.5.6
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Cisco SX80 Phone Book.clz
+  Scope=1
+  Module=Cisco SX-80 Drive v1.5.6
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Cisco SX80 Help.pdf
+  Scope=1
+  Module=Cisco SX80 Corporate Phone Book.clz
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Device Offline Timer V2.umc
+  Scope=1
+[END]

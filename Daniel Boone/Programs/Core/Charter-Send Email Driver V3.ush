@@ -1,0 +1,196 @@
+[BEGIN]
+  Version=1
+[END]
+[BEGIN]
+  ObjTp=FSgntr
+  Sgntr=UserSPlus
+  RelVrs=1
+  IntStrVrs=1
+  SPlusVrs=4.04.01
+  CrossCplrVrs=1.3
+[END]
+[BEGIN]
+  ObjTp=Hd
+  Cmn1=	For use inside the Charter Send E-Mail module only.
+[END]
+[BEGIN]
+  ObjTp=Symbol
+  Exclusions=1,19,20,21,88,89,167,168,179,213,214,215,216,217,225,226,248,249,266,267,310,718,756,854,
+  Exclusions_CDS=5
+  Inclusions_CDS=6
+  Name=Charter-Send E-Mail Driver v3
+  SmplCName=Charter-Send Email Driver V3.usp
+  Code=1
+  SysRev5=4.000
+  SMWRev=2.02.05
+  InputCue1=[~UNUSED~]
+  InputSigType1=Digital
+  InputCue2=[~UNUSED~]
+  InputSigType2=Digital
+  InputCue3=[~UNUSED~]
+  InputSigType3=Digital
+  InputCue4=[~UNUSED~]
+  InputSigType4=Digital
+  InputCue5=[~UNUSED~]
+  InputSigType5=Digital
+  InputCue6=[~UNUSED~]
+  InputSigType6=Digital
+  InputCue7=send_user_msg
+  InputSigType7=Digital
+  InputCue8=send_system_msg
+  InputSigType8=Digital
+  InputCue9=send_test_msg
+  InputSigType9=Digital
+  OutputCue1=[~UNUSED~]
+  OutputSigType1=Digital
+  OutputCue2=[~UNUSED~]
+  OutputSigType2=Digital
+  OutputCue3=[~UNUSED~]
+  OutputSigType3=Digital
+  OutputCue4=[~UNUSED~]
+  OutputSigType4=Digital
+  OutputCue5=[~UNUSED~]
+  OutputSigType5=Digital
+  OutputCue6=[~UNUSED~]
+  OutputSigType6=Digital
+  OutputCue7=success
+  OutputSigType7=Digital
+  OutputCue8=part_success
+  OutputSigType8=Digital
+  OutputCue9=failure
+  OutputSigType9=Digital
+  InputList2Cue1=system_IP$
+  InputList2SigType1=Serial
+  InputList2Cue2=vtc_IP$
+  InputList2SigType2=Serial
+  InputList2Cue3=vtc_name$
+  InputList2SigType3=Serial
+  InputList2Cue4=room_name$
+  InputList2SigType4=Serial
+  InputList2Cue5=state$
+  InputList2SigType5=Serial
+  InputList2Cue6=city$
+  InputList2SigType6=Serial
+  InputList2Cue7=building$
+  InputList2SigType7=Serial
+  InputList2Cue8=user_msg$
+  InputList2SigType8=Serial
+  InputList2Cue9=system_msg$
+  InputList2SigType9=Serial
+  InputList2Cue10=user_name$
+  InputList2SigType10=Serial
+  InputList2Cue11=user_contact$
+  InputList2SigType11=Serial
+  OutputList2Cue1=error_number
+  OutputList2SigType1=Analog
+  OutputList2Cue2=error_text$
+  OutputList2SigType2=Serial
+  ParamCue1=[Reference Name]
+  ParamCue2=To_Field
+  ParamSigType2=String
+  ParamCue3=From_Field
+  ParamSigType3=String
+  ParamCue4=CC_Field
+  ParamSigType4=String
+  ParamCue5=Server
+  ParamSigType5=String
+  ParamCue6=User_Name
+  ParamSigType6=String
+  ParamCue7=Password
+  ParamSigType7=String
+  MinVariableInputs=9
+  MaxVariableInputs=9
+  MinVariableInputsList2=11
+  MaxVariableInputsList2=11
+  MinVariableOutputs=9
+  MaxVariableOutputs=9
+  MinVariableOutputsList2=2
+  MaxVariableOutputsList2=2
+  MinVariableParams=6
+  MaxVariableParams=6
+  Expand=expand_separately
+  Expand2=expand_separately
+  ProgramTree=Logic
+  SymbolTree=32
+  Hint=
+  PdfHelp=
+  HelpID= 
+  Render=4
+  Smpl-C=16
+  CompilerCode=-48
+  CompilerParamCode=27
+  CompilerParamCode5=14
+  NumFixedParams=1
+  Pp1=1
+  Pp2=2
+  Pp3=3
+  Pp4=4
+  Pp5=5
+  Pp6=6
+  Pp7=7
+  MPp=7
+  NVStorage=10
+  ParamSigType1=String
+  SmplCInputCue1=o#
+  SmplCOutputCue1=i#
+  SmplCInputList2Cue1=an#
+  SmplCOutputList2Cue1=ai#
+  SPlus2CompiledName=S2_Charter_Send_Email_Driver_V3
+  SymJam=NonExclusive
+  FileName=Charter-Send Email Driver V3.ush
+  SIMPLPlusModuleEncoding=0
+[END]
+[BEGIN]
+  ObjTp=Dp
+  H=1
+  Tp=1
+  NoS=False
+[END]
+[BEGIN]
+  ObjTp=Dp
+  H=2
+  Tp=1
+  HD=False
+  NoS=False
+  VVS=0
+[END]
+[BEGIN]
+  ObjTp=Dp
+  H=3
+  Tp=1
+  HD=False
+  NoS=False
+  VVS=0
+[END]
+[BEGIN]
+  ObjTp=Dp
+  H=4
+  Tp=1
+  HD=False
+  NoS=False
+  VVS=0
+[END]
+[BEGIN]
+  ObjTp=Dp
+  H=5
+  Tp=1
+  HD=False
+  NoS=False
+  VVS=0
+[END]
+[BEGIN]
+  ObjTp=Dp
+  H=6
+  Tp=1
+  HD=False
+  NoS=False
+  VVS=0
+[END]
+[BEGIN]
+  ObjTp=Dp
+  H=7
+  Tp=1
+  HD=False
+  NoS=False
+  VVS=0
+[END]
